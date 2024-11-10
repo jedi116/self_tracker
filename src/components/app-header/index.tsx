@@ -9,9 +9,13 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Image from 'next/image';
+import {Session} from "next-auth";
+import {signIn, signOut} from "next-auth/react"
+import {Button} from "@mui/material";
 
-export default function MenuAppBar() {
-    const [auth] = React.useState(true);
+export default function MenuAppBar(
+    {session}:{ session: Session | null }
+) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
 
@@ -45,7 +49,7 @@ export default function MenuAppBar() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Kaizen(改善)
                     </Typography>
-                    {auth && (
+                    {session ? (
                         <div>
                             <IconButton
                                 size="large"
@@ -74,9 +78,12 @@ export default function MenuAppBar() {
                             >
                                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                                <MenuItem onClick={() => {
+                                    signOut()
+                                }}>Sign Out</MenuItem>
                             </Menu>
                         </div>
-                    )}
+                    ): <Button onClick={() => signIn()}>Sign In</Button>}
                 </Toolbar>
             </AppBar>
     );
