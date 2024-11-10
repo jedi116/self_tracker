@@ -1,15 +1,14 @@
 import { signIn } from "@/auth"
 
 export function SignIn() {
-    const handleSignIn = async (formData: FormData) => {
+    const handleSignIn = async () => {
         "use server"
-        await signIn("resend", formData)
+        await signIn("github")
     }
     return (
         <form
             action={handleSignIn}
         >
-            <input type="text" name="email" placeholder="Email" />
             <button type="submit">Signin with Resend</button>
         </form>
     )
