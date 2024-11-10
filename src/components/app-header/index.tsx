@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import Image from 'next/image';
 
 export default function MenuAppBar() {
-    const [auth, setAuth] = React.useState(true);
+    const [auth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
 
