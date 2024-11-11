@@ -26,7 +26,7 @@ export default  function Home() {
 
   return (
     <Box
-        sx={{height: '90vh', backgroundColor: 'rgb(33,33,57)'}}
+        sx={{minHeight: '90vh', backgroundColor: 'rgb(33,33,57)'}}
         display="flex"
         flexDirection="column"
     >
@@ -41,11 +41,14 @@ export default  function Home() {
       >
         <Image src={'/blue_dark_glow_goku.png'} alt={'blue dark glowing goku'} width={440} height={305}/>
       </Box>
-        <Typography sx={{paddingLeft: '70vh', paddingRight: '20vh'}} variant="h2" component="div">{speech}</Typography>
-        <Typography sx={{paddingLeft: '70vh', paddingRight: '20vh'}} variant="h5" component="div">
+    <Box sx={{paddingLeft: '30%', paddingRight: '20%'}}>
+        <Typography variant="h2" component="div">{speech}</Typography>
+        <Typography variant="h5" component="div">
             Power comes in response to a need, not a desire.
             You have to create that need.
         </Typography>
+    </Box>
+
     </Box>
   );
 }
