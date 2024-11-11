@@ -5,13 +5,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Avatar from '@mui/material/Avatar';
 import Image from 'next/image';
 import {Session} from "next-auth";
 import {signIn, signOut} from "next-auth/react"
 import {Button} from "@mui/material";
+import {redirect} from "next/navigation";
 
 export default function MenuAppBar(
     {session}:{ session: Session | null }
@@ -23,12 +24,13 @@ export default function MenuAppBar(
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
+    const handleProfileClick = () => {
+        setAnchorEl(null)
+        redirect('/profile')
     };
 
     return (
-            <AppBar position="static" sx={{backgroundColor: '#012721'}}>
+            <AppBar position="static" sx={{backgroundColor: '#002936'}}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -45,8 +47,9 @@ export default function MenuAppBar(
                         width={40}
                         height={40}
                         style={{ marginRight: 16 }}
+                        onClick={() => redirect('/')}
                     />
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                         Kaizen(改善)
                     </Typography>
                     {session ? (
@@ -59,7 +62,7 @@ export default function MenuAppBar(
                                 onClick={handleMenu}
                                 color="inherit"
                             >
-                                <AccountCircle />
+                                <Avatar alt="user image" src={session.user?.image || '/generic_user.jpg'} />
                             </IconButton>
                             <Menu
                                 id="menu-appbar"
@@ -74,13 +77,10 @@ export default function MenuAppBar(
                                     horizontal: 'right',
                                 }}
                                 open={Boolean(anchorEl)}
-                                onClose={handleClose}
+                                onClose={() => setAnchorEl(null)}
                             >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                                <MenuItem onClick={() => {
-                                    signOut()
-                                }}>Sign Out</MenuItem>
+                                <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+                                <MenuItem onClick={()=>signOut()}>Sign Out</MenuItem>
                             </Menu>
                         </div>
                     ): <Button onClick={() => signIn()}>Sign In</Button>}

@@ -13,7 +13,7 @@ export default function Footer() {
             alignItems="center"
             flexDirection="row"
             gap={2}
-            sx={{ width: '100%', backgroundColor: '#012721', color: 'white' }}
+            sx={{ width: '100%', backgroundColor: '#002936', color: 'white' }}
 
         >
             <Image
@@ -23,7 +23,7 @@ export default function Footer() {
                 height={40}
                 style={{ marginRight: 16 }}
             />
-            <Typography variant="h6">Kaizen</Typography>
+            <Typography variant="h5" component="div">Kaizen</Typography>
         </Box>
     )
 }

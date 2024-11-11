@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from '@/theme';
 import {AppHeaderWithSession} from "@/components/app-header/indexWithSession";
 import Footer from "@/components/footer";
+import '@/app/globals.css'
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (

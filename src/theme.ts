@@ -11,10 +11,10 @@ const roboto = Roboto({
 const theme = createTheme({
     cssVariables: true,
     palette: {
-        mode: 'light',
+        mode: 'dark',
     },
     typography: {
-        fontFamily: roboto.style.fontFamily,
+        fontFamily: `SaiyanFont` , // , ${roboto.style.fontFamily}
     },
     components: {
         MuiAlert: {
