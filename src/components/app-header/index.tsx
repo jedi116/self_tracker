@@ -10,7 +10,7 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Image from 'next/image';
 import {Session} from "next-auth";
-import {signIn, signOut} from "next-auth/react"
+import {signOut} from "next-auth/react"
 import {Button} from "@mui/material";
 import {redirect} from "next/navigation";
 
