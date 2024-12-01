@@ -83,7 +83,9 @@ export default function MenuAppBar(
                                 <MenuItem onClick={()=>signOut()}>Sign Out</MenuItem>
                             </Menu>
                         </div>
-                    ): <Button onClick={() => signIn()}>Sign In</Button>}
+                    ): <Button onClick={() => {
+                        redirect('/auth/signin')
+                    }}>Sign In</Button>}
                 </Toolbar>
             </AppBar>
     );
