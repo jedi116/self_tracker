@@ -1,8 +1,6 @@
-import {defaultGetRouteHandlerWithErrors} from "@/service/helpers";
+import {processGenericRequest} from "@/service/helpers";
 import {getAllWorkouts} from "@/service/workout";
 
-export async function GET(request: Request): Promise<Response> {
-    const { searchParams } = new URL(request.url);
-    const user = searchParams.get('user')
-    return defaultGetRouteHandlerWithErrors(getAllWorkouts(user))
+export async function GET(_: Request): Promise<Response> {
+    return processGenericRequest((session) => getAllWorkouts(session.user?.id))
 }

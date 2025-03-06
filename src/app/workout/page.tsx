@@ -11,6 +11,7 @@ import WorkoutTabs from "@/app/workout/tabs";
 import WorkoutPlan from "@/types/WorkoutPlan";
 import WorkoutGoal from "@/types/WorkoutGoal";
 import {WorkoutProvider} from "@/context/workout"
+import {WorkoutFormProvider} from "@/context/workout/form";
 
 
 
@@ -32,13 +33,11 @@ export default async function Workout() {
                 minHeight: '85vh',
                 width: '95%',
             }}>
-                <WorkoutProvider>
-                    <Header />
-                    <WorkoutTabs
-                        workouts={workouts}
-                        plans={plans}
-                        goals={goals}
-                    />
+                <WorkoutProvider workouts={workouts} plans={plans} goals={goals}>
+                    <WorkoutFormProvider>
+                        <Header />
+                        <WorkoutTabs />
+                    </WorkoutFormProvider>
                 </WorkoutProvider>
             </Paper>
         </Box>

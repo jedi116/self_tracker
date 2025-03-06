@@ -1,11 +1,8 @@
-import {Box, ListItem, ListItemButton, ListItemText, List} from '@mui/material'
-import Workout from "@/types/Workout";
+import {Box} from '@mui/material'
 import * as React from "react";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-
-type WorkoutsProps = {
-    workouts: Workout[]
-}
+import {useContext} from "react";
+import {WorkoutContext} from "@/context/workout";
 
 const columnDef:  GridColDef[] = [
     {field: 'plan', headerName: 'Plan', width: 200},
@@ -18,14 +15,14 @@ const columnDef:  GridColDef[] = [
     {field: 'date', headerName: 'Date'}
 ]
 
-export default function Workouts({workouts}: WorkoutsProps) {
-
+export default function Workouts() {
+    const context = useContext(WorkoutContext)
     return (
         <Box
             sx={{height: '50vh', width: '100%'}}
         >
             <DataGrid
-                rows={workouts}
+                rows={context.workouts}
                 columns={columnDef}
                 checkboxSelection
                 sx={{ border: 0 }}

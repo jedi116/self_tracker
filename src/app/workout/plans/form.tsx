@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
     Box,
     FormControl,
@@ -10,21 +10,22 @@ import {
     Typography,
     Button
 } from "@mui/material";
-import WorkoutPlan from "@/types/WorkoutPlan";
+import WorkoutGoal from "@/types/WorkoutGoal";
+import {usePlanForm} from "@/app/workout/hooks/planForm.hook";
+import Alert from '@mui/material/Alert';
+import ErrorIcon from '@mui/icons-material/Error';
 
-export default function PlanForm ()  {
-    const [goals, setGoals] = useState<{value: string, label: string}[]>([{
-        value: 'test',
-        label: 'TEST'
-    }])
-    const [values, setValues] = useState<Omit<WorkoutPlan, 'id' | 'userId' | 'active'>>({
-        goalId: '',
-        name: '',
-    });
-
-    const handleChange = (prop: any) => (event: any) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+type props = {
+    goals: WorkoutGoal[];
+}
+export default function PlanForm ({goals}: props)  {
+    const {
+        handleSubmit,
+        goalsOptions,
+        values,
+        setValues,
+        error
+    } = usePlanForm(goals)
     return (
         <Box
             component="form"
@@ -34,10 +35,10 @@ export default function PlanForm ()  {
             noValidate
             autoComplete="off"
         >
+            {error && <Alert severity="error" icon={<ErrorIcon />}>{error}</Alert>}
             <Typography
                 component="div"
                 variant="h2"
-                //sx={{marginLeft: '20%'}}
             >
                 Create Workout Plan
             </Typography>
@@ -46,14 +47,16 @@ export default function PlanForm ()  {
                 <Input
                     id="plan-name-input"
                     aria-describedby="plan-name-input-text"
-                    value={values.name}
-                    onChange={handleChange('name')}
+                    value={values?.name}
+                    onChange={(event: any) => {
+                        setValues((prev: any) => ({ ...prev, name: event.target.value }));
+                    }}
                     sx={{
                         fontSize: '25px!important',
                         backgroundColor: '#0a6e80 !important'
                     }}
                 />
-                <FormHelperText id="plan-name-input-text" sx={{fontSize: '18px!important'}}>Enter a name for the Workout Plan.</FormHelperText>
+                <FormHelperText id="plan-name-input-text" sx={{fontSize: '13px!important'}}>Enter a name for the Workout Plan.</FormHelperText>
             </FormControl>
 
             <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -61,15 +64,17 @@ export default function PlanForm ()  {
                 <Select
                     labelId="simple-select-label"
                     id="simple-select"
-                    value={values.goalId}
+                    value={values?.goalId}
                     label="Age"
-                    onChange={handleChange('goalId')}
+                    onChange={(event: any) => {
+                        setValues((prev: any) => ({ ...prev, goalId: event.target.value }));
+                    }}
                     sx={{
-                        fontSize: '25px!important',
+                        fontSize: '18px!important',
                         backgroundColor: '#0a6e80 !important'
                     }}
                 >
-                    {goals.map((option) => (
+                    {goalsOptions.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                             {option.label}
                         </MenuItem>
@@ -88,6 +93,7 @@ export default function PlanForm ()  {
                     marginLeft: '8% !important',
                     fontSize: '20px!important',
                 }}
+                onClick={handleSubmit}
             >
                 Submit
             </Button>

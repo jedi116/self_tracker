@@ -10,30 +10,38 @@ import {
 
 import * as React from "react";
 import {WorkoutPlan} from "@prisma/client";
+import {useContext} from "react";
+import {WorkoutContext} from "@/context/workout";
+import {WorkoutFormContext} from "@/context/workout/form";
+import {usePlans} from "@/app/workout/hooks/plans.hook";
 
-export default function Plans({plans}: {plans: WorkoutPlan[]}) {
-
+export default function Plans() {
+    const {
+        plans,
+        handleEdit,
+        handleDelete
+    } = usePlans()
     return (
         <TableContainer component={Box}>
             <Table sx={{ width: '100%' }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         <TableCell
-                            sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black'}}
+                            sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
                         >
                             Plan name
                         </TableCell>
                         <TableCell align="right"
-                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black'}}
+                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
                         >
                             Goal
                         </TableCell>
                         <TableCell align="right"
-                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black'}}
+                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
                         >active&nbsp;
                         </TableCell>
-                        <TableCell align="right" sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black'}}>
-                            &nbsp;
+                        <TableCell align="right" sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}>
+                            actions&nbsp;
                         </TableCell>
                     </TableRow>
                 </TableHead>
@@ -53,8 +61,18 @@ export default function Plans({plans}: {plans: WorkoutPlan[]}) {
                                     sx={{
                                         backgroundColor: '#0AB5D2 !important',
                                     }}
+                                    onClick={handleEdit(row)}
                                 >
                                     edit
+                                </Button>
+                                <Button
+                                    sx={{
+                                        backgroundColor: '#eb4034 !important',
+                                        marginLeft: '10px',
+                                    }}
+                                    onClick={handleDelete(row.id)}
+                                >
+                                    delete
                                 </Button>
                             </TableCell>
                         </TableRow>

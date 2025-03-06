@@ -3,12 +3,13 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Workouts from "@/app/workout/workouts";
+import Workouts from "@/app/workout/workouts/workouts";
 import Workout from "@/types/Workout";
 import WorkoutPlan from "@/types/WorkoutPlan";
 import WorkoutGoal from "@/types/WorkoutGoal";
-import Plans from "@/app/workout/plans"
-import Goals from '@/app/workout/goals'
+import Plans from "@/app/workout/plans/plans"
+import Goals from '@/app/workout/goals/goals'
+import {useWorkoutTabs} from "@/app/workout/hooks/tab.hook";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -40,19 +41,9 @@ function a11yProps(index: number) {
     };
 }
 
-interface WorkoutTabsProps {
-    workouts: Workout[],
-    plans: WorkoutPlan[],
-    goals: WorkoutGoal[]
-}
 
-export default function BasicTabs({workouts, plans, goals}: WorkoutTabsProps) {
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
-
+export default function BasicTabs() {
+   const {value, handleChange} = useWorkoutTabs()
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', marginLeft: '30%' }}>
@@ -63,16 +54,13 @@ export default function BasicTabs({workouts, plans, goals}: WorkoutTabsProps) {
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-                <Plans plans={plans.map(data => {
-                    const goalName = goals.find(d => d.id === data.goalId)
-                    return {...data, goalId: goalName?.name || ''}
-                    })} />
+                <Plans />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                <Goals goals={goals}/>
+                <Goals />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <Workouts  workouts={workouts}/>
+                <Workouts />
             </CustomTabPanel>
         </Box>
     );
