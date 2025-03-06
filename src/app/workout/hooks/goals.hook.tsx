@@ -8,7 +8,7 @@ export const useGoals = () => {
     const handleDelete =(id: string) => async () => {
         try {
             await fetch(`api/workout/goals?id=${id}`, {method: 'DELETE'})
-            context.refreshGoals && context.refreshGoals()
+            if (context.refreshGoals) context.refreshGoals()
         } catch (error: any) {
             console.log(error)
         }

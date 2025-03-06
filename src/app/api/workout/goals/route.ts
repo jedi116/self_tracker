@@ -1,7 +1,7 @@
 import {processGenericRequest, processPostRequest} from "@/service/helpers";
 import {createWorkoutGoal, updateWorkoutGoal, deleteWorkoutGoal, getAllGoals} from "@/service/workout";
 
-export async function GET(_: Request): Promise<Response> {
+export async function GET(): Promise<Response> {
     return processGenericRequest((session) => getAllGoals(session.user?.id as string))
 }
 
@@ -21,7 +21,7 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 export async function PUT(request: Request): Promise<Response> {
-    return processPostRequest(request, async (payload, _) => {
+    return processPostRequest(request, async (payload) => {
         await updateWorkoutGoal({
             id: payload.id,
             name: payload.name,

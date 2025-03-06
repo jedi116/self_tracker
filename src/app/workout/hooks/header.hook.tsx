@@ -6,10 +6,10 @@ export const useHeader = () => {
     const context = useContext(WorkoutContext)
     const formContext = useContext(WorkoutFormContext)
     const openModal = (modalName: string) => {
-        if (context.updateWorkoutContext) {
+        if (context.updateWorkoutContext && formContext.setFormState) {
             switch (modalName) {
                 case "add workout":
-                    formContext.setFormState && formContext.setFormState((prev) => ({
+                    formContext.setFormState((prev) => ({
                         ...prev,
                         selectedWorkout:  null,
                         workoutFormType: 'create'
@@ -20,7 +20,7 @@ export const useHeader = () => {
                     }))
                     break
                 case "create workout plan":
-                    formContext.setFormState && formContext.setFormState((prev) => ({
+                    formContext.setFormState((prev) => ({
                         ...prev,
                         selectedPlan:  null,
                         planFormType: 'create'
@@ -31,7 +31,7 @@ export const useHeader = () => {
                     }))
                     break
                 case "create workout goal":
-                    formContext.setFormState && formContext.setFormState((prev) => ({
+                    formContext.setFormState((prev) => ({
                         ...prev,
                         selectedGoal:  null,
                         goalFormType: 'create'

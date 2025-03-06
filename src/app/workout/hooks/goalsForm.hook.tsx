@@ -45,7 +45,7 @@ export const useGoalForm = () => {
         }
         return true;
     }
-    const handleSubmit = async (event: any) => {
+    const handleSubmit = async () => {
         if (values) {
             if (validateData(values)) {
                 const response = await fetch("/api/workout/goals", {

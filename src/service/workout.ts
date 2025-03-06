@@ -31,7 +31,7 @@ export const getAllWorkouts = async (user: string | null | undefined): Promise<W
     })
 }
 
-export const getAllPlans = (user: string) => {
+export const getAllPlans = (user: string | undefined) => {
     return prisma.workoutPlan.findMany({
         where: {
             userId: user,
@@ -39,7 +39,7 @@ export const getAllPlans = (user: string) => {
     })
 }
 
-export const getAllGoals = (user: string) => {
+export const getAllGoals = (user: string | undefined) => {
     return prisma.workoutGoal.findMany({
         where: {
             userId: user,

@@ -8,7 +8,7 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import WorkoutModal from "@/app/workout/modal";
 import {useHeader} from "@/app/workout/hooks/header.hook";
 
-export default function  header () {
+export default function  Header () {
     const {
         openModal,
         getModalName,

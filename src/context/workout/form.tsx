@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 import WorkoutPlan from "@/types/WorkoutPlan";
 import WorkoutGoal from "@/types/WorkoutGoal"
 import Workout from "@/types/Workout";

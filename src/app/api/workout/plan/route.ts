@@ -2,7 +2,7 @@ import {createWorkoutPlan, deleteWorkoutPlan, getAllPlans, updateWorkoutPlan} fr
 import {processGenericRequest, processPostRequest} from "@/service/helpers";
 
 
-export async function GET(_: Request): Promise<Response> {
+export async function GET(): Promise<Response> {
     return processGenericRequest((session) => getAllPlans(session.user?.id as string))
 }
 
@@ -19,7 +19,7 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 export async function PUT(request: Request): Promise<Response> {
-    return processPostRequest(request, async (payload, _) => {
+    return processPostRequest(request, async (payload) => {
         await updateWorkoutPlan({
             id: payload.id,
             goalId: payload.goalId,
