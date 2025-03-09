@@ -8,25 +8,25 @@ export async function GET(): Promise<Response> {
 
 export async function POST(request: Request): Promise<Response> {
     return processPostRequest(request, async (payload, session) => {
-        await createWorkoutPlan({
+        const data = await createWorkoutPlan({
             userId: session.user?.id,
             goalId: payload.goalId,
             name: payload.name,
             active: true
         } as any)
-        return { message: 'success fully created'}
+        return { message: 'success fully created', data }
     })
 }
 
 export async function PUT(request: Request): Promise<Response> {
     return processPostRequest(request, async (payload) => {
-        await updateWorkoutPlan({
+        const data = await updateWorkoutPlan({
             id: payload.id,
             goalId: payload.goalId,
             name: payload.name,
             active: payload.active
         })
-        return { message: 'success fully updated'}
+        return { message: 'success fully updated', data }
     } )
 }
 

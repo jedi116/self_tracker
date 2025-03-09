@@ -26,9 +26,9 @@ export default function  Header () {
             </Typography>
             <Image src={'/powering_up_goku.png'} alt={'powering up goku'} width={80} height={80}/>
             <ButtonGroup size="large" aria-label="Large button group">
-                <Button sx={{marginRight: '2% !important'}} onClick={() => openModal("add workout")}> <AddIcon/> add workout </Button>
                 <Button sx={{marginRight: '2% !important'}} onClick={() => openModal("create workout plan")}> <AddToPhotosIcon/> create workout plan</Button>
                 <Button sx={{marginRight: '2% !important'}} onClick={() => openModal("create workout goal")}> <AddTaskIcon/>  create workout goal</Button>
+                <Button sx={{marginRight: '2% !important'}} onClick={() => openModal("add workout")}> <AddIcon/> add workout </Button>
             </ButtonGroup>
             <Modal
                 open={modalOpen}

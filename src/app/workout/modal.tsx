@@ -4,6 +4,7 @@ import {Box, Paper} from "@mui/material";
 import PlanForm from "@/app/workout/plans/form";
 import {WorkoutContext} from "@/context/workout";
 import GoalsForm from "@/app/workout/goals/form";
+import WorkoutsForm from "@/app/workout/workouts/form";
 
 
 interface WorkoutModalProps {
@@ -29,7 +30,7 @@ export default function WorkoutModal(props: WorkoutModalProps) {
                         <PlanForm goals={context.goals}/>
                         : props.name === "goal"
                             ? <GoalsForm />
-                            : <div>workouts</div>
+                            : <WorkoutsForm/>
                 }
             </Paper>
         </Box>

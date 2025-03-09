@@ -57,16 +57,24 @@ export const useGoalForm = () => {
                         ...values,
                     }),
                 });
+                const responseBody = await response.json();
                 if (!response.ok) {
-                    const errorData = await response.json();
                     setError("Error creating workout goal")
-                    console.error("Error creating workout goal:", errorData);
+                    console.error("Error creating workout goal:", responseBody);
                     return;
                 }
-                context.refreshGoals && context.refreshGoals();
+
                 context.updateWorkoutContext && context.updateWorkoutContext((prevState) => ({
                     ...prevState,
-                    createGoalModalOpen: false
+                    createGoalModalOpen: false,
+                    goals: [
+                        ...prevState.goals.filter(data => data.id !== responseBody.data.id),
+                        {
+                            ...responseBody.data,
+                            beginDate: new Date(responseBody.data.beginDate),
+                            endDate: new Date(responseBody.data.endDate)
+                        }
+                    ]
                 }))
             }
         }

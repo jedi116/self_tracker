@@ -27,18 +27,23 @@ export const usePlanForm = (
                 id: formContext.selectedPlan?.id,
             }),
         });
+        const responsePayload = await response.json();
         if (!response.ok) {
-            const errorData = await response.json();
             setError("Error creating workout plan")
-            console.error("Error creating workout plan:", errorData);
+            console.error("Error creating workout plan:", responsePayload);
             return;
         }
 
         context.updateWorkoutContext && context.updateWorkoutContext((prevState) => ({
             ...prevState,
-            createPlanModalOpen: false
+            createPlanModalOpen: false,
+            plans: [
+                ...prevState.plans.filter(data => data.id !== responsePayload.data.id),
+                {
+                    ...responsePayload.data
+                }
+            ]
         }))
-        context.refreshPlans && context.refreshPlans()
     }
     React.useEffect(() => {
         setGoalsOptions(goals.map(goal => {

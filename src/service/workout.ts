@@ -10,10 +10,13 @@ export const getAllWorkouts = async (user: string | null | undefined): Promise<W
                 include: {
                     WorkoutGoal: true
                 }
-            }
+            },
         },
         where: {
             userid: user
+        },
+        orderBy: {
+            workoutdate: "desc"
         }
     })
     return  data.map((workout) => {
@@ -26,7 +29,48 @@ export const getAllWorkouts = async (user: string | null | undefined): Promise<W
             reps: workout.reps,
             duration: workout.duration,
             goal: workout.WorkoutPlan.WorkoutGoal.name,
-            date: workout.workoutdate
+            date: workout.workoutdate,
+            userid: workout.userid
+        }
+    })
+}
+
+export const createWorkout = (workout: Workout) => {
+    return prisma.workout.create({
+        data: {
+            name: workout.name,
+            description: workout.description,
+            sets: workout.sets,
+            reps: workout.reps,
+            duration: workout.duration,
+            workoutdate: workout.date,
+            planId: workout.plan as string,
+            userid: workout.userid as string,
+        }
+    })
+}
+
+export const updateWorkout = (workout: Partial<Workout>) => {
+    return prisma.workout.update({
+        data: {
+            name: workout.name,
+            description: workout.description,
+            sets: workout.sets,
+            reps: workout.reps,
+            duration: workout.duration,
+            workoutdate: workout.date,
+            planId: workout.plan as string,
+        },
+        where: {
+            id: workout.id
+        }
+    })
+}
+
+export const deleteWorkout = (id: string | undefined) => {
+    return prisma.workout.delete({
+        where: {
+            id: id
         }
     })
 }
@@ -122,6 +166,23 @@ export const deleteWorkoutGoal = (id: string | undefined) => {
     return prisma.workoutGoal.delete({
         where: {
             id: id
+        }
+    })
+}
+
+export const getAllWorkoutTypes = (userId: string | undefined) => {
+    return prisma.workoutTypes.findMany({
+        where: {
+            userId: userId
+        }
+    })
+}
+
+export const createWorkoutType = (workoutType: { userId: string; name: string }) => {
+    return prisma.workoutTypes.create({
+        data: {
+            userId: workoutType.userId,
+            name: workoutType.name,
         }
     })
 }

@@ -3,6 +3,7 @@ import * as React from "react";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import {useContext} from "react";
 import {WorkoutContext} from "@/context/workout";
+import Workout from "@/types/Workout";
 
 const columnDef:  GridColDef[] = [
     {field: 'plan', headerName: 'Plan', width: 200},

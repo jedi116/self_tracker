@@ -23,6 +23,7 @@ model User {
   Workout       Workout[]
   WorkoutGoal   WorkoutGoal[]
   WorkoutPlan   WorkoutPlan[]
+  WorkoutTypes  WorkoutTypes[]
 }
 
 model Account {
@@ -119,4 +120,12 @@ model Workout {
   User        User?       @relation(fields: [userid], references: [id], onDelete: Cascade, map: "Workout_userId_fkey")
 
   @@index([name], map: "Workout_name_key")
+  @@index([name])
+}
+
+model WorkoutTypes {
+  id     String  @id @default(cuid())
+  name   String? @unique
+  userId String?
+  User   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

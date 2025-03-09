@@ -6,12 +6,13 @@ import * as React from "react";
 import Header from './header';
 import {auth} from "@/auth";
 import {redirect} from "next/navigation";
-import {getAllGoals, getAllPlans, getAllWorkouts} from "@/service/workout";
+import {getAllGoals, getAllPlans, getAllWorkouts, getAllWorkoutTypes} from "@/service/workout";
 import WorkoutTabs from "@/app/workout/tabs";
 import WorkoutPlan from "@/types/WorkoutPlan";
 import WorkoutGoal from "@/types/WorkoutGoal";
 import {WorkoutProvider} from "@/context/workout"
 import {WorkoutFormProvider} from "@/context/workout/form";
+import {WorkoutTypes} from "@/types/WorkoutTypes";
 
 
 
@@ -23,6 +24,7 @@ export default async function Workout() {
     const workouts = await getAllWorkouts(session.user?.id)
     const plans: WorkoutPlan[] = await getAllPlans(session.user?.id)
     const goals: WorkoutGoal[] = await getAllGoals(session.user?.id)
+    const workoutTypes: Partial<WorkoutTypes> [] = await getAllWorkoutTypes(session.user?.id)
     return (
         <Box
             sx={{height: '90vh'}}
@@ -33,7 +35,7 @@ export default async function Workout() {
                 minHeight: '85vh',
                 width: '95%',
             }}>
-                <WorkoutProvider workouts={workouts} plans={plans} goals={goals}>
+                <WorkoutProvider workouts={workouts} plans={plans} goals={goals} workoutTypes={workoutTypes}>
                     <WorkoutFormProvider>
                         <Header />
                         <WorkoutTabs />

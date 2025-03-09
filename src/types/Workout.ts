@@ -6,6 +6,6 @@ export default interface Workout {
     sets: number | null,
     reps: number | null,
     duration: string | null,
-    goal: string | null,
-    date: Date,
+    userid: string | null,
+    date: Date | string,
 }
