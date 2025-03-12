@@ -41,16 +41,24 @@ function a11yProps(index: number) {
     };
 }
 
-
+const tabTextStyles = {
+    fontSize: { xs: "0.8em !important", sm: "1.2em !important", md: "1.5em !important", lg: '2em !important' },
+    marginLeft: { xs: "0.1% !important", sm: "2% !important", md: "5% !important", lg: '5% !important' },
+}
 export default function BasicTabs() {
    const {value, handleChange} = useWorkoutTabs()
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{
+            width: { xs: "100%", sm: "90%", md: "80%", lg: "70%" }, // Adjust width per device
+            height: { xs: "auto", sm: "60vh", md: "70vh" }, // Dynamic height
+            margin: "auto",
+            borderRadius: 2,
+        }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', marginLeft: '30%' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Workout Plans" {...a11yProps(0)} sx={{ fontSize: '28px !important', marginLeft: '5% !important' }}/>
-                    <Tab label="Workout goals" {...a11yProps(1)} sx={{ fontSize: '28px !important', marginLeft: '5% !important' }}/>
-                    <Tab label="Workouts" {...a11yProps(2)} sx={{ fontSize: '28px !important', marginLeft: '5% !important' }}/>
+                    <Tab label="Workout Plans" {...a11yProps(0)} sx={tabTextStyles}/>
+                    <Tab label="Workout goals" {...a11yProps(1)} sx={tabTextStyles}/>
+                    <Tab label="Workouts" {...a11yProps(2)} sx={tabTextStyles}/>
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>

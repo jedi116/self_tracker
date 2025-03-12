@@ -10,6 +10,7 @@ import {
 
 import * as React from "react";
 import {useGoals} from "@/app/workout/hooks/goals.hook";
+import {styles} from "@/app/workout/plans/plans";
 
 export default function Goals() {
     const {
@@ -23,51 +24,51 @@ export default function Goals() {
                 <TableHead>
                     <TableRow>
                         <TableCell
-                            sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black' , fontFamily: 'SaiyanFont!important'}}
+                            sx={styles.tableHeaders}
                         >
                             Goal name
                         </TableCell>
                         <TableCell align="right"
-                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
+                                   sx={styles.tableHeaders}
                         >
                             Description
                         </TableCell>
                         <TableCell align="right"
-                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
+                                   sx={styles.tableHeaders}
                         >weightGoal&nbsp;
                         </TableCell>
                         <TableCell align="right"
-                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
+                                   sx={styles.tableHeaders}
                         >bodyFatGoal&nbsp;
                         </TableCell>
                         <TableCell align="right"
-                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
+                                   sx={styles.tableHeaders}
                         >beginDate&nbsp;
                         </TableCell>
                         <TableCell align="right"
-                                   sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}
+                                   sx={styles.tableHeaders}
                         >endDate&nbsp;
                         </TableCell>
-                        <TableCell align="right" sx={{fontSize: '23px!important', backgroundColor: '#ccffe6!important', color: 'black', fontFamily: 'SaiyanFont!important'}}>
+                        <TableCell align="right" sx={styles.tableHeaders}>
                             &nbsp;
                         </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {goals.map((row) => (
+                    {goals.map((row, index) => (
                         <TableRow
-                            key={row.name}
+                            key={index}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <TableCell component="th" scope="row" sx={{fontSize: '20px!important'}}>
+                            <TableCell component="th" scope="row" sx={styles.tableRows}>
                                 {row.name}
                             </TableCell>
-                            <TableCell align="right" sx={{fontSize: '20px!important'}}>{row.description}</TableCell>
-                            <TableCell align="right" sx={{fontSize: '20px!important'}}>{row.weightGoal}</TableCell>
-                            <TableCell align="right" sx={{fontSize: '20px!important'}}>{row.bodyFatGoal}</TableCell>
-                            <TableCell align="right" sx={{fontSize: '20px!important'}}>{row.beginDate.toString()}</TableCell>
-                            <TableCell align="right" sx={{fontSize: '20px!important'}}>{row.endDate.toString()}</TableCell>
-                            <TableCell align="right" sx={{fontSize: '20px!important'}}>
+                            <TableCell align="right" sx={styles.tableRows}>{row.description}</TableCell>
+                            <TableCell align="right" sx={styles.tableRows}>{row.weightGoal}</TableCell>
+                            <TableCell align="right" sx={styles.tableRows}>{row.bodyFatGoal}</TableCell>
+                            <TableCell align="right" sx={styles.tableRows}>{row.beginDate.toString()}</TableCell>
+                            <TableCell align="right" sx={styles.tableRows}>{row.endDate.toString()}</TableCell>
+                            <TableCell align="right" sx={styles.tableRows}>
                                 <Button
                                     sx={{
                                         backgroundColor: '#0AB5D2 !important',
