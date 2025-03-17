@@ -13,12 +13,18 @@ import {Session} from "next-auth";
 import {signOut} from "next-auth/react"
 import {Button} from "@mui/material";
 import {redirect} from "next/navigation";
+import SideBar from "@/components/side-bar";
+import {useAuthSession} from "@/context/auth";
+
+type AppBarProps = {
+    session: Session | null
+}
 
 export default function MenuAppBar(
-    {session}:{ session: Session | null }
+    {session}: AppBarProps
 ) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
+    const [drawerOpen, setDrawerOpen] = React.useState(false);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -29,8 +35,14 @@ export default function MenuAppBar(
         redirect('/profile')
     };
 
+    const {setSessionValue} = useAuthSession()
+
+    React.useEffect(() => {
+        setSessionValue(session)
+    }, [session, setSessionValue])
     return (
             <AppBar position="static" sx={{backgroundColor: '#002936'}}>
+                <SideBar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -39,7 +51,7 @@ export default function MenuAppBar(
                         aria-label="menu"
                         sx={{ mr: 2 }}
                     >
-                        <MenuIcon />
+                        <MenuIcon onClick={() => setDrawerOpen(true)} />
                     </IconButton>
                     <Image
                         src="/Kaizen.png"

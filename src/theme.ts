@@ -7,7 +7,22 @@ const theme = createTheme({
         mode: 'dark',
     },
     typography: {
-        fontFamily: `SaiyanFont` , // , ${roboto.style.fontFamily}
+        fontFamily: 'Roboto, Arial, sans-serif', // Default font family for other elements
+        h1: {
+            fontFamily: 'SaiyanFont', // Apply SaiyanFont to H1
+        },
+        h2: {
+            fontFamily: 'SaiyanFont', // Apply SaiyanFont to H2
+        },
+        h3: {
+            fontFamily: 'SaiyanFont', // Apply SaiyanFont to H3
+        },
+        h4: {
+            fontFamily: 'SaiyanFont', // Apply SaiyanFont to H4
+        },
+        h5: {
+            fontFamily: 'SaiyanFont', // Apply SaiyanFont to H4
+        }
     },
     components: {
         MuiAlert: {
