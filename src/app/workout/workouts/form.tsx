@@ -17,7 +17,7 @@ import {WorkoutTypeForm} from "@/app/workout/workouts/workoutTypeForm";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useWorkoutsForm} from "@/app/workout/hooks/workoutsForm.hook";
 
-
+const inputFontSize = {fontSize: {xs: '10px!important', sm: '10px!important', md: '12px!important', lg: '15px!important'},}
 
 export default function WorkoutsForm () {
     const {
@@ -34,8 +34,11 @@ export default function WorkoutsForm () {
             component="form"
             sx={{
                 width: '600px',
+                height: "400px",
                 display: 'flex',
                 flexDirection: 'column',
+                overflowY: "auto",
+                overflowX: "auto",
             }}
             noValidate
             autoComplete="off"
@@ -43,12 +46,12 @@ export default function WorkoutsForm () {
             {error && <Alert severity="error" icon={<ErrorIcon />}>{error}</Alert>}
             <Typography
                 component="div"
-                variant="h2"
+                sx={{fontSize: {xs: '25px!important', sm: '35px!important', md: '45px!important', lg: '70px!important'}, fontFamily: 'SaiyanFont!important'}}
             >
                 Create Workout Entry
             </Typography>
             <FormControl sx={{width: '80%'}}>
-                <InputLabel id="plan-select-label" sx={{fontSize: '17px!important'}}>Plan</InputLabel>
+                <InputLabel id="plan-select-label" sx={{fontSize: inputFontSize.fontSize}}>Plan</InputLabel>
                 <Select
                     labelId="plan-select-label"
                     id="plan-select"
@@ -58,7 +61,7 @@ export default function WorkoutsForm () {
                         setValues((prev: any) => ({ ...prev, plan: event.target.value }));
                     }}
                     sx={{
-                        fontSize: '17px!important',
+                        fontSize: inputFontSize.fontSize,
                         backgroundColor: '#0a6e80 !important'
                     }}
                 >
@@ -70,7 +73,7 @@ export default function WorkoutsForm () {
                 </Select>
             </FormControl>
             <FormControl sx={{width: '80%' , marginTop: '15px'}}>
-                <InputLabel id="name-select-label" sx={{fontSize: '17px!important'}}>Workout Type</InputLabel>
+                <InputLabel id="name-select-label" sx={{fontSize: inputFontSize.fontSize}}>Workout Type</InputLabel>
                 <Select
                     labelId="name-select-label"
                     id="name-select"
@@ -80,7 +83,7 @@ export default function WorkoutsForm () {
                         setValues((prev: any) => ({ ...prev, name: event.target.value }));
                     }}
                     sx={{
-                        fontSize: '17px!important',
+                        fontSize: inputFontSize.fontSize,
                         backgroundColor: '#0a6e80 !important'
                     }}
                 >
@@ -104,14 +107,14 @@ export default function WorkoutsForm () {
                 </AccordionDetails>
             </Accordion>
             <FormControl>
-                <InputLabel htmlFor="workout-description-input" sx={{fontSize: '19px!important'}}>Description</InputLabel>
+                <InputLabel htmlFor="workout-description-input" sx={{fontSize: inputFontSize.fontSize}}>Description</InputLabel>
                 <Input
                     id="workout-description-input"
                     aria-describedby="workout-description-input-text"
                     value={values?.description}
                     onChange={handleChange('description')}
                     sx={{
-                        fontSize: '17px!important',
+                        fontSize: inputFontSize.fontSize,
                         backgroundColor: '#0a6e80 !important',
                         width: '80%'
                     }}
@@ -122,14 +125,14 @@ export default function WorkoutsForm () {
                 <FormHelperText id="workout-description-input-text" sx={{fontSize: '10px!important'}}>Enter description</FormHelperText>
             </FormControl>
             <FormControl>
-                <InputLabel htmlFor="workout-sets-input" sx={{fontSize: '19px!important'}}></InputLabel>
+                <InputLabel htmlFor="workout-sets-input" sx={{fontSize: inputFontSize.fontSize}}></InputLabel>
                 <Input
                     id="workout-sets-input"
                     aria-describedby="workout-sets--input-text"
                     value={values?.sets}
                     onChange={handleChange('sets')}
                     sx={{
-                        fontSize: '17px!important',
+                        fontSize: inputFontSize.fontSize,
                         backgroundColor: '#0a6e80 !important',
                         width: '80%'
                     }}
@@ -138,14 +141,14 @@ export default function WorkoutsForm () {
                 <FormHelperText id="workout-sets-input-text" sx={{fontSize: '10px!important'}}>Enter number of sets.</FormHelperText>
             </FormControl>
             <FormControl>
-                <InputLabel htmlFor="workout-reps-input" sx={{fontSize: '19px!important'}}></InputLabel>
+                <InputLabel htmlFor="workout-reps-input" sx={{fontSize: inputFontSize.fontSize}}></InputLabel>
                 <Input
                     id="workout-reps-input"
                     aria-describedby="workout-reps-input-text"
                     value={values?.reps}
                     onChange={handleChange('reps')}
                     sx={{
-                        fontSize: '17px!important',
+                        fontSize: inputFontSize.fontSize,
                         backgroundColor: '#0a6e80 !important',
                         width: '80%'
                     }}
@@ -154,14 +157,14 @@ export default function WorkoutsForm () {
                 <FormHelperText id="workout-reps-input-text" sx={{fontSize: '10px!important'}}>Enter number of reps.</FormHelperText>
             </FormControl>
             <FormControl>
-                <InputLabel htmlFor="workout-duration-input" sx={{fontSize: '19px!important'}}></InputLabel>
+                <InputLabel htmlFor="workout-duration-input" sx={{fontSize: inputFontSize.fontSize}}></InputLabel>
                 <Input
                     id="workout-duration-input"
                     aria-describedby="workout-duration-input-text"
                     value={values?.duration}
                     onChange={handleChange('duration')}
                     sx={{
-                        fontSize: '17px!important',
+                        fontSize: inputFontSize.fontSize,
                         backgroundColor: '#0a6e80 !important',
                         width: '80%'
                     }}
@@ -192,7 +195,7 @@ export default function WorkoutsForm () {
                     borderRadius: '2px !important',
                     padding: '2px !important',
                     marginTop: '10px !important',
-                    fontSize: '20px!important',
+                    fontSize: inputFontSize.fontSize,
                 }}
                 onClick={handleSubmit}
             >

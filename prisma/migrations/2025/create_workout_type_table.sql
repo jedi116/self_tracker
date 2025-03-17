@@ -16,7 +16,8 @@ ALTER TABLE IF EXISTS public."WorkoutTypes"
 
 -- DROP INDEX IF EXISTS public."WorkoutTypes_name_key";
 
-CREATE UNIQUE INDEX IF NOT EXISTS "WorkoutTypes_name_key"
+-- DROP INDEX IF EXISTS public."WorkoutTypes_name_userId_key";
+CREATE UNIQUE INDEX IF NOT EXISTS "WorkoutTypes_name_userId_key"
     ON public."WorkoutTypes" USING btree
-    ("name" COLLATE pg_catalog."default" ASC NULLS LAST)
+    ("name" COLLATE pg_catalog."default" ASC NULLS LAST, "userId" COLLATE pg_catalog."default" ASC NULLS LAST)
     TABLESPACE pg_default;

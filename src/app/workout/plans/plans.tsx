@@ -1,19 +1,13 @@
 import {
-    TableContainer,
-    Box,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    Table, Button
+    Box, Button
 } from '@mui/material'
-
+import { DataGrid } from '@mui/x-data-grid';
 import * as React from "react";
 import {usePlans} from "@/app/workout/hooks/plans.hook";
 
 export const  styles = {
     tableHeaders : {
-        fontSize: {xs: '18px!important', sm: '22px!important', md: '25px!important', lg: '30px!important'},
+        fontSize: {xs: '20px!important', sm: '20px!important', md: '25px!important', lg: '30px!important'},
         backgroundColor: '#ccffe6!important',
         color: 'black',
         fontFamily: 'SaiyanFont!important'
@@ -28,64 +22,55 @@ export default function Plans() {
         handleEdit,
         handleDelete
     } = usePlans()
+
+    const columns = React.useMemo(() => [
+        { field: 'name', headerName: 'Plan Name', flex: 1, minWidth: 150, headerClassName: 'custom-header' },
+        { field: 'goalId', headerName: 'Goal', flex: 1, minWidth: 100, headerClassName: 'custom-header'  },
+        { field: 'active', headerName: 'Active', flex: 1, minWidth: 100, renderCell: (params: any) => (params.value ? 'Yes' : 'No'), headerClassName: 'custom-header'  },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 1,
+            minWidth: 200,
+            sortable: false,
+            renderCell: (params: any) => (
+                <Box>
+                    <Button
+                        sx={{ backgroundColor: '#0AB5D2 !important', marginRight: '8px' }}
+                        onClick={handleEdit(params.row)}
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        sx={{ backgroundColor: '#eb4034 !important' }}
+                        onClick={handleDelete(params.row.id)}
+                    >
+                        Delete
+                    </Button>
+                </Box>
+            ),
+        headerClassName: 'custom-header'
+},
+    ], [handleEdit, handleDelete]);
+
     return (
-        <TableContainer component={Box}>
-            <Table sx={{ width: '100%' }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell
-                            sx={styles.tableHeaders}
-                        >
-                            Plan name
-                        </TableCell>
-                        <TableCell align="right"
-                                   sx={styles.tableHeaders}
-                        >
-                            Goal
-                        </TableCell>
-                        <TableCell align="right"
-                                   sx={styles.tableHeaders}
-                        >active&nbsp;
-                        </TableCell>
-                        <TableCell align="right" sx={styles.tableHeaders}>
-                            actions&nbsp;
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {plans.map((row, index) => (
-                        <TableRow
-                            key={index}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row" sx={styles.tableRows}>
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>{row.goalId}</TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>{row.active ? 'yes' : 'no'}</TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>
-                                <Button
-                                    sx={{
-                                        backgroundColor: '#0AB5D2 !important',
-                                    }}
-                                    onClick={handleEdit(row)}
-                                >
-                                    edit
-                                </Button>
-                                <Button
-                                    sx={{
-                                        backgroundColor: '#eb4034 !important',
-                                        marginLeft: '10px',
-                                    }}
-                                    onClick={handleDelete(row.id)}
-                                >
-                                    delete
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Box     sx={{
+            height: 500,
+            width: '100%',
+            '& .custom-header': {
+                ...styles.tableHeaders
+            },
+            '& .MuiDataGrid-cell': {
+                ...styles.tableRows
+            }
+        }}>
+            <DataGrid
+                rows={plans}
+                columns={columns}
+                pageSizeOptions={[5, 10, 20]}
+                disableRowSelectionOnClick
+                autoPageSize
+            />
+        </Box>
     );
 }

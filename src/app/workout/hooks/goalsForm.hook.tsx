@@ -64,7 +64,7 @@ export const useGoalForm = () => {
                     return;
                 }
 
-                context.updateWorkoutContext && context.updateWorkoutContext((prevState) => ({
+                if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({
                     ...prevState,
                     createGoalModalOpen: false,
                     goals: [

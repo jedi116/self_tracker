@@ -9,7 +9,7 @@ export const useGoals = () => {
         try {
             await fetch(`api/workout/goals?id=${id}`, {method: 'DELETE'})
             if (context.refreshGoals) context.refreshGoals()
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.log(error)
         }
     }
@@ -21,12 +21,12 @@ export const useGoals = () => {
             beginDate: goal?.beginDate.toISOString().split('T')[0],
             endDate: goal?.endDate.toISOString().split('T')[0]
         }
-        formContext.setFormState && formContext.setFormState((prev) => ({
+        if (formContext.setFormState) formContext.setFormState((prev) => ({
             ...prev,
             selectedGoal: parsedGoal as any || null,
             goalFormType: 'edit'
         }))
-        context.updateWorkoutContext && context.updateWorkoutContext((prevState) => ({
+        if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({
             ...prevState,
             createGoalModalOpen: true
         }))

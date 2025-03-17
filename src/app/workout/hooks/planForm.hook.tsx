@@ -34,7 +34,7 @@ export const usePlanForm = (
             return;
         }
 
-        context.updateWorkoutContext && context.updateWorkoutContext((prevState) => ({
+        if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({
             ...prevState,
             createPlanModalOpen: false,
             plans: [

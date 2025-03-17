@@ -22,12 +22,12 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public."WorkoutGoal"
     OWNER to postgres;
--- Index: WorkoutGoal_name_key
+-- Index: WorkoutGoal_name_userId_key
 
--- DROP INDEX IF EXISTS public."WorkoutGoal_name_key";
+-- DROP INDEX IF EXISTS public."WorkoutGoal_name_userId_key";
 
-CREATE UNIQUE INDEX IF NOT EXISTS "WorkoutGoal_name_key"
+CREATE UNIQUE INDEX IF NOT EXISTS "WorkoutGoal_name_userId_key"
     ON public."WorkoutGoal" USING btree
-    (name COLLATE pg_catalog."default" ASC NULLS LAST)
+    (name COLLATE pg_catalog."default" ASC NULLS LAST, "userId" COLLATE pg_catalog."default" ASC NULLS LAST)
     TABLESPACE pg_default;
 

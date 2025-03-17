@@ -1,5 +1,6 @@
 import {processGenericRequest, processPostRequest} from "@/service/helpers";
 import {createWorkout, getAllWorkouts, updateWorkout, deleteWorkout} from "@/service/workout";
+import Workout from "@/types/Workout";
 
 export async function GET() {
     return processGenericRequest((session) => getAllWorkouts(session.user?.id as string))
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
             duration: payload.duration,
             date: new Date(payload.date),
             plan: payload.plan
-        } as any)
+        } as Workout)
         return { message: 'success fully created', data }
     })
 }

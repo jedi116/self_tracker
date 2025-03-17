@@ -85,7 +85,7 @@ model PassPhrase {
 model WorkoutGoal {
   id          String        @id @default(cuid())
   userId      String
-  name        String        @unique
+  name        String
   weightGoal  String
   bodyFatGoal String
   description String
@@ -93,6 +93,8 @@ model WorkoutGoal {
   endDate     DateTime      @db.Date
   User        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   WorkoutPlan WorkoutPlan[]
+
+  @@unique([name, userId])
 }
 
 model WorkoutPlan {
@@ -125,7 +127,9 @@ model Workout {
 
 model WorkoutTypes {
   id     String  @id @default(cuid())
-  name   String? @unique
+  name   String?
   userId String?
   User   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([name, userId])
 }

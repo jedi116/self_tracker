@@ -18,6 +18,14 @@ import ErrorIcon from '@mui/icons-material/Error';
 type props = {
     goals: WorkoutGoal[];
 }
+const styles =  {
+    formLabels: {
+        fontSize: {xs: '20px!important', sm: '20px!important', md: '22px!important', lg: '25px!important'},
+        backgroundColor: '#0a6e80 !important',
+        width: '60%',
+        marginLeft: '8% !important'
+    }
+}
 export default function PlanForm ({goals}: props)  {
     const {
         handleSubmit,
@@ -30,7 +38,9 @@ export default function PlanForm ({goals}: props)  {
         <Box
             component="form"
             sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
+                width: '600px',
+                display: 'flex',
+                flexDirection: 'column',
             }}
             noValidate
             autoComplete="off"
@@ -38,29 +48,31 @@ export default function PlanForm ({goals}: props)  {
             {error && <Alert severity="error" icon={<ErrorIcon />}>{error}</Alert>}
             <Typography
                 component="div"
-                variant="h2"
+                sx={{fontSize: {xs: '35px!important', sm: '45px!important', md: '65px!important', lg: '80px!important'}, fontFamily: 'SaiyanFont!important'}}
             >
                 Create Workout Plan
             </Typography>
             <FormControl>
-                <InputLabel htmlFor="plan-name-input" sx={{fontSize: '25px!important'}}>Plan Name</InputLabel>
+                <InputLabel htmlFor="plan-name-input" sx={{
+                    fontSize: styles.formLabels.fontSize,
+                    marginLeft: '8% !important'
+                }}>Plan Name</InputLabel>
                 <Input
                     id="plan-name-input"
                     aria-describedby="plan-name-input-text"
                     value={values?.name}
-                    onChange={(event: any) => {
+                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
                         setValues((prev: any) => ({ ...prev, name: event.target.value }));
                     }}
-                    sx={{
-                        fontSize: '25px!important',
-                        backgroundColor: '#0a6e80 !important'
-                    }}
+                    sx={styles.formLabels}
                 />
-                <FormHelperText id="plan-name-input-text" sx={{fontSize: '13px!important'}}>Enter a name for the Workout Plan.</FormHelperText>
+                <FormHelperText id="plan-name-input-text" sx={{fontSize: '13px!important',marginLeft: '8% !important'}}>Enter a name for the Workout Plan.</FormHelperText>
             </FormControl>
 
             <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="simple-select-label" sx={{fontSize: '25px!important'}}>Goals</InputLabel>
+                <InputLabel id="simple-select-label" sx={{
+                    fontSize: styles.formLabels.fontSize,
+                    marginLeft: '8% !important'}}>Goals</InputLabel>
                 <Select
                     labelId="simple-select-label"
                     id="simple-select"
@@ -69,10 +81,7 @@ export default function PlanForm ({goals}: props)  {
                     onChange={(event: any) => {
                         setValues((prev: any) => ({ ...prev, goalId: event.target.value }));
                     }}
-                    sx={{
-                        fontSize: '18px!important',
-                        backgroundColor: '#0a6e80 !important'
-                    }}
+                    sx={styles.formLabels}
                 >
                     {goalsOptions.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
@@ -92,6 +101,7 @@ export default function PlanForm ({goals}: props)  {
                     marginTop: '10px !important',
                     marginLeft: '8% !important',
                     fontSize: '20px!important',
+                    width: '60%'
                 }}
                 onClick={handleSubmit}
             >

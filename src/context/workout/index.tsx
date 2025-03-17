@@ -67,7 +67,7 @@ export const WorkoutProvider = ({
                 ...prevState,
                 plans
             }))
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("Error refreshing plans", error)
         }
     }
@@ -80,7 +80,7 @@ export const WorkoutProvider = ({
                 ...prevState,
                 goals
             }))
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("Error refreshing goals", error)
         }
     }
@@ -92,7 +92,7 @@ export const WorkoutProvider = ({
                 ...prevState,
                 workoutTypes
             }))
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("Error refreshing workout types", error)
         }
     }
@@ -108,7 +108,7 @@ export const WorkoutProvider = ({
                     date: new Date(workout.date).toISOString().split('T')[0]
                 }))
             }))
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("Error refreshing workouts", error)
         }
     }

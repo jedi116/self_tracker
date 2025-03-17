@@ -4,9 +4,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Workouts from "@/app/workout/workouts/workouts";
-import Workout from "@/types/Workout";
-import WorkoutPlan from "@/types/WorkoutPlan";
-import WorkoutGoal from "@/types/WorkoutGoal";
 import Plans from "@/app/workout/plans/plans"
 import Goals from '@/app/workout/goals/goals'
 import {useWorkoutTabs} from "@/app/workout/hooks/tab.hook";

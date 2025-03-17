@@ -3,7 +3,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
-import {Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Divider, Drawer, List} from "@mui/material";
 import {redirect} from "next/navigation";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
@@ -74,13 +74,13 @@ export default function SideBar({drawerOpen, setDrawerOpen}: SideBarProps) {
                                 Kaizen(改善)
                             </Typography>
                         </Box>
-                        {sideBarFirstItems.map(({name, icon, link}, index) => (
+                        {sideBarFirstItems.map(({name, icon, link}) => (
                             <SideBarList name={name} icon={icon} link={link}  key={name}/>
                         ))}
                     </List>
                     <Divider />
                     <List>
-                        {sideBarSecondaryList.map(({name, icon, link}, index) => (
+                        {sideBarSecondaryList.map(({name, icon, link}) => (
                             <SideBarList name={name} icon={icon} link={link}  key={name}/>
                         ))}
                     </List>

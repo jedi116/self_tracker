@@ -1,5 +1,6 @@
 import {createWorkoutPlan, deleteWorkoutPlan, getAllPlans, updateWorkoutPlan} from "@/service/workout";
 import {processGenericRequest, processPostRequest} from "@/service/helpers";
+import WorkoutPlan from "@/types/WorkoutPlan";
 
 
 export async function GET(): Promise<Response> {
@@ -13,7 +14,7 @@ export async function POST(request: Request): Promise<Response> {
             goalId: payload.goalId,
             name: payload.name,
             active: true
-        } as any)
+        } as WorkoutPlan)
         return { message: 'success fully created', data }
     })
 }

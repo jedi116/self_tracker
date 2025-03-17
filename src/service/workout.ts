@@ -2,6 +2,7 @@ import {prisma} from "@/prisma";
 import Workout from "@/types/Workout";
 import WorkoutPlan from "@/types/WorkoutPlan";
 import WorkoutGoal from "@/types/WorkoutGoal";
+import {WorkoutTypes} from "@/types/WorkoutTypes";
 
 export const getAllWorkouts = async (user: string | null | undefined): Promise<Workout[]> => {
     const data = await prisma.workout.findMany({
@@ -92,7 +93,7 @@ export const getAllGoals = (user: string | undefined) => {
 }
 
 
-export const createWorkoutPlan = (plan: { userId: string; goalId: string; name?: string; active: boolean }) => {
+export const createWorkoutPlan = (plan: WorkoutPlan) => {
     return prisma.workoutPlan.create({
         data: {
             userId: plan.userId,
@@ -124,15 +125,7 @@ export const deleteWorkoutPlan = (id: string | undefined) => {
     })
 }
 
-export const createWorkoutGoal = (goal:{
-    name: string,
-    description: string,
-    userId: string,
-    weightGoal: string,
-    bodyFatGoal: string,
-    beginDate: Date,
-    endDate: Date
-})=> {
+export const createWorkoutGoal = (goal: WorkoutGoal)=> {
     return prisma.workoutGoal.create({
         data: {
             name: goal.name,
@@ -178,7 +171,7 @@ export const getAllWorkoutTypes = (userId: string | undefined) => {
     })
 }
 
-export const createWorkoutType = (workoutType: { userId: string; name: string }) => {
+export const createWorkoutType = (workoutType: WorkoutTypes) => {
     return prisma.workoutTypes.create({
         data: {
             userId: workoutType.userId,

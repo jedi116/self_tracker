@@ -39,7 +39,7 @@ export default function MenuAppBar(
 
     React.useEffect(() => {
         setSessionValue(session)
-    }, [session])
+    }, [session, setSessionValue])
     return (
             <AppBar position="static" sx={{backgroundColor: '#002936'}}>
                 <SideBar drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>

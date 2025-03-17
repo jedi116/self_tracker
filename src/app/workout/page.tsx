@@ -18,7 +18,7 @@ import {WorkoutTypes} from "@/types/WorkoutTypes";
 
 export default async function Workout() {
     const session = await auth()
-    if (!session) {
+    if (!session || !session.user) {
         redirect('/auth/signin')
     }
     const workouts = await getAllWorkouts(session.user?.id)
@@ -27,13 +27,14 @@ export default async function Workout() {
     const workoutTypes: Partial<WorkoutTypes> [] = await getAllWorkoutTypes(session.user?.id)
     return (
         <Box
-            sx={{height: '90vh'}}
+            sx={{height: '100vh', flexGrow: 1}}
         >
             <Paper sx={{
                 marginLeft: '2%',
                 marginTop:'2%',
-                minHeight: '85vh',
                 width: '95%',
+                height: '100vh',
+                flexGrow: 1,
             }}>
                 <WorkoutProvider workouts={workouts} plans={plans} goals={goals} workoutTypes={workoutTypes}>
                     <WorkoutFormProvider>

@@ -1,13 +1,8 @@
 import {
-    TableContainer,
     Box,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    Table, Button
+    Button
 } from '@mui/material'
-
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import * as React from "react";
 import {useGoals} from "@/app/workout/hooks/goals.hook";
 import {styles} from "@/app/workout/plans/plans";
@@ -18,79 +13,103 @@ export default function Goals() {
         handleDelete,
         goals
     } = useGoals()
+    const columns: GridColDef[] = React.useMemo(() => [
+        {
+            field: 'name',
+            headerName: 'Goal Name',
+            flex: 1,
+            minWidth: 150,
+            headerClassName: 'custom-header'
+        },
+        {
+            field: 'description',
+            headerName: 'Description',
+            flex: 2,
+            minWidth: 400,
+            headerClassName: 'custom-header'
+        },
+        {
+            field: 'weightGoal',
+            headerName: 'Weight Goal',
+            flex: 1,
+            minWidth: 150,
+            headerClassName: 'custom-header'
+        },
+        {
+            field: 'bodyFatGoal',
+            headerName: 'Body Fat Goal',
+            flex: 1,
+            minWidth: 150,
+            headerClassName: 'custom-header'
+        },
+        {
+            field: 'beginDate',
+            headerName: 'Begin Date',
+            flex: 1,
+            minWidth: 150,
+            headerClassName: 'custom-header',
+        },
+        {
+            field: 'endDate',
+            headerName: 'End Date',
+            flex: 1,
+            minWidth: 150,
+            headerClassName: 'custom-header',
+        },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 1,
+            minWidth: 200,
+            sortable: false,
+            headerClassName: 'custom-header',
+            renderCell: (params) => (
+                <Box>
+                    <Button
+                        sx={{ backgroundColor: '#0AB5D2 !important', marginRight: '8px' }}
+                        onClick={handleEdit(params.row)}
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        sx={{ backgroundColor: '#eb4034 !important' }}
+                        onClick={handleDelete(params.row.id)}
+                    >
+                        Delete
+                    </Button>
+                </Box>
+            ),
+        },
+    ], [handleEdit, handleDelete]);
+
+    // Add id to rows if not already present
+    const rowsWithId = React.useMemo(() => {
+        return goals.map((goal, index) => ({
+            ...goal,
+            id: goal.id || `goal-${index}`
+        }));
+    }, [goals]);
+
     return (
-        <TableContainer component={Box}>
-            <Table sx={{ width: '100%' }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell
-                            sx={styles.tableHeaders}
-                        >
-                            Goal name
-                        </TableCell>
-                        <TableCell align="right"
-                                   sx={styles.tableHeaders}
-                        >
-                            Description
-                        </TableCell>
-                        <TableCell align="right"
-                                   sx={styles.tableHeaders}
-                        >weightGoal&nbsp;
-                        </TableCell>
-                        <TableCell align="right"
-                                   sx={styles.tableHeaders}
-                        >bodyFatGoal&nbsp;
-                        </TableCell>
-                        <TableCell align="right"
-                                   sx={styles.tableHeaders}
-                        >beginDate&nbsp;
-                        </TableCell>
-                        <TableCell align="right"
-                                   sx={styles.tableHeaders}
-                        >endDate&nbsp;
-                        </TableCell>
-                        <TableCell align="right" sx={styles.tableHeaders}>
-                            &nbsp;
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {goals.map((row, index) => (
-                        <TableRow
-                            key={index}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row" sx={styles.tableRows}>
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>{row.description}</TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>{row.weightGoal}</TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>{row.bodyFatGoal}</TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>{row.beginDate.toString()}</TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>{row.endDate.toString()}</TableCell>
-                            <TableCell align="right" sx={styles.tableRows}>
-                                <Button
-                                    sx={{
-                                        backgroundColor: '#0AB5D2 !important',
-                                    }}
-                                    onClick={handleEdit(row)}
-                                >
-                                    edit
-                                </Button>
-                                <Button
-                                    sx={{
-                                        backgroundColor: '#eb4034 !important',
-                                        marginLeft: '10px',
-                                    }}
-                                    onClick={handleDelete(row.id)}
-                                >
-                                    delete
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Box
+            sx={{
+                height: 500,
+                width: '100%',
+                '& .custom-header': {
+                    ...styles.tableHeaders
+                },
+                '& .MuiDataGrid-cell': {
+                    ...styles.tableRows
+                }
+            }}
+        >
+            <DataGrid
+                rows={rowsWithId}
+                columns={columns}
+                pageSizeOptions={[5, 10, 20]}
+                disableRowSelectionOnClick
+                autoPageSize
+            />
+        </Box>
     );
 }
