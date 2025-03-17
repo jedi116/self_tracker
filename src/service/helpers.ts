@@ -17,7 +17,7 @@ export const processGenericRequest = async <T> (
             status: 200,
             headers: { 'Content-Type': 'application/json' },
         });
-    } catch (error: unknown) {
+    } catch (error: any) {
         return new Response(JSON.stringify({ error: errorMessage || error.message }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export const processPostRequest = async <T> (
             status: 200,
             headers: { 'Content-Type': 'application/json' },
         });
-    } catch (error: unknown) {
+    } catch (error: any) {
         console.log(error.message)
         if ( error instanceof FailedToAuthenticate) {
             return new Response(JSON.stringify({ error: 'not authenticate' }), {
