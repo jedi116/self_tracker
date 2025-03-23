@@ -22,7 +22,6 @@ model User {
   sessions      Session[]
   Workout       Workout[]
   WorkoutGoal   WorkoutGoal[]
-  WorkoutPlan   WorkoutPlan[]
   WorkoutTypes  WorkoutTypes[]
 }
 
@@ -83,34 +82,22 @@ model PassPhrase {
 }
 
 model WorkoutGoal {
-  id          String        @id @default(cuid())
+  id          String    @id @default(cuid())
   userId      String
   name        String
   weightGoal  String
   bodyFatGoal String
   description String
-  beginDate   DateTime      @db.Date
-  endDate     DateTime      @db.Date
-  User        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  WorkoutPlan WorkoutPlan[]
+  beginDate   DateTime  @db.Date
+  endDate     DateTime  @db.Date
+  Workout     Workout[]
+  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([name, userId])
 }
 
-model WorkoutPlan {
-  id          String      @id @default(cuid())
-  userId      String
-  goalId      String
-  name        String?     @unique
-  active      Boolean
-  Workout     Workout[]
-  WorkoutGoal WorkoutGoal @relation(fields: [goalId], references: [id], onDelete: Cascade)
-  User        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 model Workout {
   id          String      @id @unique(map: "unique_id") @default(cuid())
-  planId      String
   name        String?
   description String?
   sets        Int?
@@ -118,7 +105,8 @@ model Workout {
   duration    String?
   workoutdate DateTime    @default(now()) @db.Date
   userid      String?
-  WorkoutPlan WorkoutPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  goalId      String
+  WorkoutGoal WorkoutGoal @relation(fields: [goalId], references: [id], onDelete: Cascade)
   User        User?       @relation(fields: [userid], references: [id], onDelete: Cascade, map: "Workout_userId_fkey")
 
   @@index([name], map: "Workout_name_key")

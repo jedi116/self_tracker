@@ -1,19 +1,21 @@
 import React from 'react';
 import {WorkoutContext} from "@/context/workout";
 import Workout from "@/types/Workout";
+import {Effect, pipe} from "effect"
+import {createOrEditWorkouts} from "@/app/workout/hooks/effects";
 
 type DropdownOption = {value: string | null | undefined, label: string | null | undefined}
 
 export const useWorkoutsForm = () => {
     const [error, setError] = React.useState<string | null>(null)
     const context = React.useContext(WorkoutContext)
-    const [planOptions, setPlanOptions] = React.useState<DropdownOption[]>([])
+    const [goalOptions, setGoalOptions] = React.useState<DropdownOption[]>([])
     const [nameOptions, setNameOptions] = React.useState<DropdownOption[]>([])
     React.useEffect(() => {
-        setPlanOptions(context.plans.map(plan => {
+        setGoalOptions(context.goals.map(goal => {
             return {
-                value: plan.id,
-                label: plan.name
+                value: goal.id,
+                label: goal.name
             }
         }))
         setNameOptions(context.workoutTypes.map(type => {
@@ -22,7 +24,7 @@ export const useWorkoutsForm = () => {
                 label: type.name
             }
         }))
-    }, [context.plans, context.workoutTypes])
+    }, [context.goals, context.workoutTypes])
     const [values, setValues] = React.useState<Partial<Workout>>({
         name: ''
     })
@@ -35,7 +37,7 @@ export const useWorkoutsForm = () => {
             setError('Workout Type is required');
             return false;
         }
-        if (!data.plan) {
+        if (!data.goalId) {
             setError('Plan is required');
             return false;
         }
@@ -45,29 +47,28 @@ export const useWorkoutsForm = () => {
         }
         return true;
     }
-    const handleSubmit = async () => {
+
+    const handleSubmit = async() => {
         if (validateData(values)) {
-            const response = await fetch("/api/workout/workouts", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    ...values,
+            await pipe(
+                createOrEditWorkouts(values, 'POST'),
+                Effect.match({
+                    onSuccess: (response) => {
+                        setError(null)
+                        if(context.refreshWorkouts) context.refreshWorkouts()
+                        if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({
+                            ...prevState,
+                            createWorkoutModalOpen: false,
+                        }))
+                    },
+                    onFailure: (error) => {
+                        console.error("Error creating workout:", error)
+                        setError("Error creating workout")
+                    }
+
                 }),
-            });
-            const responseBody = await response.json();
-            if (!response.ok ) {
-                console.error("Error creating workout:", responseBody)
-                setError("Error creating workout")
-                return
-            }
-            setError(null)
-            if(context.refreshWorkouts) context.refreshWorkouts()
-            if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({
-                ...prevState,
-                createWorkoutModalOpen: false,
-            }))
+                Effect.runPromise
+            )
         }
     }
 
@@ -76,7 +77,7 @@ export const useWorkoutsForm = () => {
         handleChange,
         handleSubmit,
         error,
-        planOptions,
+        goalOptions,
         nameOptions,
         values,
         setValues

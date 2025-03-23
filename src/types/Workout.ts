@@ -1,6 +1,6 @@
 export default interface Workout {
     id: string,
-    plan: string | null,
+    goalId:string,
     name: string | null,
     description: string | null,
     sets: number | null,

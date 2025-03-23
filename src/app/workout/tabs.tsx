@@ -4,7 +4,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Workouts from "@/app/workout/workouts/workouts";
-import Plans from "@/app/workout/plans/plans"
 import Goals from '@/app/workout/goals/goals'
 import {useWorkoutTabs} from "@/app/workout/hooks/tab.hook";
 
@@ -53,13 +52,13 @@ export default function BasicTabs() {
         }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', marginLeft: '30%' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Workout Plans" {...a11yProps(0)} sx={tabTextStyles}/>
+                    <Tab label="Workout Summary" {...a11yProps(0)} sx={tabTextStyles}/>
                     <Tab label="Workout goals" {...a11yProps(1)} sx={tabTextStyles}/>
                     <Tab label="Workouts" {...a11yProps(2)} sx={tabTextStyles}/>
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-                <Plans />
+                Coming Soon
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 <Goals />

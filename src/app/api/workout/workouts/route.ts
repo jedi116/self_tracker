@@ -17,7 +17,7 @@ export async function POST(request: Request) {
             reps: parseInt(payload.reps),
             duration: payload.duration,
             date: new Date(payload.date),
-            plan: payload.plan
+            goalId: payload.goalId
         } as Workout)
         return { message: 'success fully created', data }
     })
@@ -33,7 +33,7 @@ export async function PUT(request: Request) {
             reps: parseInt(payload.reps),
             duration: payload.duration,
             date: new Date(payload.date),
-            plan: payload.plan
+            goalId: payload.goalId
         })
         return { message: 'success fully updated', data }
     })

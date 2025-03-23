@@ -24,10 +24,10 @@ export default function WorkoutsForm () {
         handleChange,
         handleSubmit,
         error,
-        planOptions,
         nameOptions,
         values,
-        setValues
+        setValues,
+        goalOptions
     } = useWorkoutsForm()
     return (
         <Box
@@ -51,21 +51,21 @@ export default function WorkoutsForm () {
                 Create Workout Entry
             </Typography>
             <FormControl sx={{width: '80%'}}>
-                <InputLabel id="plan-select-label" sx={{fontSize: inputFontSize.fontSize}}>Plan</InputLabel>
+                <InputLabel id="goal-select-label" sx={{fontSize: inputFontSize.fontSize}}>goal</InputLabel>
                 <Select
-                    labelId="plan-select-label"
-                    id="plan-select"
-                    value={values?.plan}
-                    label="plan"
+                    labelId="goal-select-label"
+                    id="goal-select"
+                    value={values?.goalId}
+                    label="goal"
                     onChange={(event: any) => {
-                        setValues((prev: any) => ({ ...prev, plan: event.target.value }));
+                        setValues((prev: any) => ({ ...prev, goalId: event.target.value }));
                     }}
                     sx={{
                         fontSize: inputFontSize.fontSize,
                         backgroundColor: '#0a6e80 !important'
                     }}
                 >
-                    {planOptions.map((option) => (
+                    {goalOptions.map((option) => (
                         <MenuItem key={option.value as string} value={option.value as string}>
                             {option.label}
                         </MenuItem>

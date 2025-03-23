@@ -19,17 +19,6 @@ export const useHeader = () => {
                         createWorkoutModalOpen: true
                     }))
                     break
-                case "create workout plan":
-                    formContext.setFormState((prev) => ({
-                        ...prev,
-                        selectedPlan:  null,
-                        planFormType: 'create'
-                    }))
-                    context.updateWorkoutContext((prevState) => ({
-                        ...prevState,
-                        createPlanModalOpen: true
-                    }))
-                    break
                 case "create workout goal":
                     formContext.setFormState((prev) => ({
                         ...prev,
@@ -47,9 +36,6 @@ export const useHeader = () => {
         }
     }
     const getModalName = useCallback(() => {
-        if (context.createPlanModalOpen) {
-            return 'plan'
-        }
         if (context.createGoalModalOpen) {
             return 'goal'
         }
@@ -63,8 +49,7 @@ export const useHeader = () => {
             context.updateWorkoutContext((prevState) => ({
                 ...prevState,
                 createWorkoutModalOpen: false,
-                createGoalModalOpen: false,
-                createPlanModalOpen: false,
+                createGoalModalOpen: false
             }))
         }
     }
@@ -73,6 +58,6 @@ export const useHeader = () => {
         openModal,
         getModalName,
         closeModal,
-        modalOpen: context.createWorkoutModalOpen || context.createPlanModalOpen || context.createGoalModalOpen
+        modalOpen: context.createWorkoutModalOpen || context.createGoalModalOpen
     }
 }

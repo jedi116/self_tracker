@@ -6,9 +6,8 @@ import * as React from "react";
 import Header from './header';
 import {auth} from "@/auth";
 import {redirect} from "next/navigation";
-import {getAllGoals, getAllPlans, getAllWorkouts, getAllWorkoutTypes} from "@/service/workout";
+import {getAllGoals, getAllWorkouts, getAllWorkoutTypes} from "@/service/workout";
 import WorkoutTabs from "@/app/workout/tabs";
-import WorkoutPlan from "@/types/WorkoutPlan";
 import WorkoutGoal from "@/types/WorkoutGoal";
 import {WorkoutProvider} from "@/context/workout"
 import {WorkoutFormProvider} from "@/context/workout/form";
@@ -22,7 +21,6 @@ export default async function Workout() {
         redirect('/auth/signin')
     }
     const workouts = await getAllWorkouts(session.user?.id)
-    const plans: WorkoutPlan[] = await getAllPlans(session.user?.id)
     const goals: WorkoutGoal[] = await getAllGoals(session.user?.id)
     const workoutTypes: Partial<WorkoutTypes> [] = await getAllWorkoutTypes(session.user?.id)
     return (
@@ -36,7 +34,7 @@ export default async function Workout() {
                 height: '100vh',
                 flexGrow: 1,
             }}>
-                <WorkoutProvider workouts={workouts} plans={plans} goals={goals} workoutTypes={workoutTypes}>
+                <WorkoutProvider workouts={workouts} goals={goals} workoutTypes={workoutTypes}>
                     <WorkoutFormProvider>
                         <Header />
                         <WorkoutTabs />

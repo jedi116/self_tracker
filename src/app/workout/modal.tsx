@@ -1,7 +1,6 @@
 'use client'
 import React, {useContext} from 'react'
 import {Box, Paper} from "@mui/material";
-import PlanForm from "@/app/workout/plans/form";
 import {WorkoutContext} from "@/context/workout";
 import GoalsForm from "@/app/workout/goals/form";
 import WorkoutsForm from "@/app/workout/workouts/form";
@@ -12,7 +11,6 @@ interface WorkoutModalProps {
 }
 
 export default function WorkoutModal(props: WorkoutModalProps) {
-    const context = useContext(WorkoutContext)
     return (
         <Box>
             <Paper
@@ -26,9 +24,7 @@ export default function WorkoutModal(props: WorkoutModalProps) {
                 }}
             >
                 {
-                    props.name === "plan" ?
-                        <PlanForm goals={context.goals}/>
-                        : props.name === "goal"
+                    props.name === "goal"
                             ? <GoalsForm />
                             : <WorkoutsForm/>
                 }

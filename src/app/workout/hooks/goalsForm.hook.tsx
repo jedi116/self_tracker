@@ -2,6 +2,8 @@ import React, {useContext} from "react";
 import {WorkoutContext} from "@/context/workout";
 import {WorkoutFormContext} from "@/context/workout/form";
 import WorkoutGoal from "@/types/WorkoutGoal";
+import {Effect, pipe} from "effect"
+import {createOrEditGoals} from "@/app/workout/hooks/effects";
 
 export const useGoalForm = () => {
     const context = useContext(WorkoutContext);
@@ -46,37 +48,28 @@ export const useGoalForm = () => {
         return true;
     }
     const handleSubmit = async () => {
-        if (values) {
-            if (validateData(values)) {
-                const response = await fetch("/api/workout/goals", {
-                    method: formContext.goalFormType === 'create' ? "POST" : "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
+        if (values && validateData(values)) {
+            await pipe(
+                createOrEditGoals(values, formContext.goalFormType === 'create' ? "POST" : "PUT"),
+                Effect.match({
+                    onSuccess: (response) => {
+                        if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({
+                            ...prevState,
+                            createGoalModalOpen: false,
+                            goals: [
+                                ...prevState.goals.filter(data => data.id !== response.data.id),
+                                {
+                                    ...response.data,
+                                    beginDate: new Date(response.data.beginDate),
+                                    endDate: new Date(response.data.endDate)
+                                }
+                            ]
+                        }))
                     },
-                    body: JSON.stringify({
-                        ...values,
-                    }),
-                });
-                const responseBody = await response.json();
-                if (!response.ok) {
-                    setError("Error creating workout goal")
-                    console.error("Error creating workout goal:", responseBody);
-                    return;
-                }
-
-                if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({
-                    ...prevState,
-                    createGoalModalOpen: false,
-                    goals: [
-                        ...prevState.goals.filter(data => data.id !== responseBody.data.id),
-                        {
-                            ...responseBody.data,
-                            beginDate: new Date(responseBody.data.beginDate),
-                            endDate: new Date(responseBody.data.endDate)
-                        }
-                    ]
-                }))
-            }
+                    onFailure: (error) => console.error(error)
+                }),
+                Effect.runPromise
+            )
         }
     }
 

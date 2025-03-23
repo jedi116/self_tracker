@@ -5,7 +5,8 @@ import {
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import * as React from "react";
 import {useGoals} from "@/app/workout/hooks/goals.hook";
-import {styles} from "@/app/workout/plans/plans";
+import {styles} from "@/app/workout/styles";
+import WorkoutGoal from "@/types/WorkoutGoal";
 
 export default function Goals() {
     const {
@@ -67,7 +68,7 @@ export default function Goals() {
                 <Box>
                     <Button
                         sx={{ backgroundColor: '#0AB5D2 !important', marginRight: '8px' }}
-                        onClick={handleEdit(params.row)}
+                        onClick={handleEdit(params.row as WorkoutGoal)}
                     >
                         Edit
                     </Button>

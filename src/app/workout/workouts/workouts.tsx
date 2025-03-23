@@ -3,10 +3,9 @@ import * as React from "react";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import {useContext} from "react";
 import {WorkoutContext} from "@/context/workout";
-import {styles} from "@/app/workout/plans/plans";
+import {styles} from "@/app/workout/styles";
 
 const columnDef:  GridColDef[] = [
-    {field: 'plan', headerName: 'Plan', width: 200, headerClassName: 'custom-header'},
     {field: 'goal', headerName: 'Goal', width: 200, headerClassName: 'custom-header'},
     {field: 'name', headerName: 'Name', width: 200, headerClassName: 'custom-header'},
     {field: 'description', headerName: 'Description', width: 300, headerClassName: 'custom-header'},
