@@ -83,14 +83,6 @@ export default function Goals() {
         },
     ], [handleEdit, handleDelete]);
 
-    // Add id to rows if not already present
-    const rowsWithId = React.useMemo(() => {
-        return goals.map((goal, index) => ({
-            ...goal,
-            id: goal.id || `goal-${index}`
-        }));
-    }, [goals]);
-
     return (
         <Box
             sx={{
@@ -105,7 +97,7 @@ export default function Goals() {
             }}
         >
             <DataGrid
-                rows={rowsWithId}
+                rows={goals}
                 columns={columns}
                 pageSizeOptions={[5, 10, 20]}
                 disableRowSelectionOnClick

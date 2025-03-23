@@ -9,7 +9,7 @@ export const useWorkoutTypeForm = () => {
     const [message, setMessage] = React.useState<string | null>(null)
     const context = React.useContext(WorkoutContext)
     const [values, setValues] = React.useState<{name?: string | undefined}>()
-    const handleChange = (prop: keyof typeof values) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (prop: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [prop]: event.target.value });
         setError(null)
         setMessage(null)

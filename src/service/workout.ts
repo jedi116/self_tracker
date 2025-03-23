@@ -11,6 +11,13 @@ export class GetAllWorkoutsPrismaError extends Error {
     }
 }
 
+export class DeleteWorkoutsPrismaError extends Error {
+    readonly _tag = 'DeleteWorkoutsPrismaError'
+    constructor(message: string) {
+        super(message)
+    }
+}
+
 export const getAllWorkouts = (user: string | null | undefined) => pipe(
     Effect.tryPromise({
         try:  () => prisma.workout.findMany({
@@ -34,7 +41,7 @@ export const getAllWorkouts = (user: string | null | undefined) => pipe(
             sets: workout.sets,
             reps: workout.reps,
             duration: workout.duration,
-            goal: workout.WorkoutGoal.name,
+            goalId: workout.WorkoutGoal.name,
             date: workout.workoutdate,
             userid: workout.userid
         }
@@ -42,8 +49,8 @@ export const getAllWorkouts = (user: string | null | undefined) => pipe(
 )
 
 
-export const createWorkout = (workout: Workout) => {
-    return prisma.workout.create({
+export const createWorkout = (workout: Workout) => pipe(
+    Effect.tryPromise(() => prisma.workout.create({
         data: {
             name: workout.name,
             description: workout.description,
@@ -54,11 +61,12 @@ export const createWorkout = (workout: Workout) => {
             goalId: workout.goalId as string,
             userid: workout.userid as string,
         }
-    })
-}
+    })),
+    Effect.flatMap(data => Effect.succeed({data, message: 'successfully created workout'}))
+)
 
-export const updateWorkout = (workout: Partial<Workout>) => {
-    return prisma.workout.update({
+export const updateWorkout = (workout: Partial<Workout>) => pipe(
+    Effect.tryPromise(() => prisma.workout.update({
         data: {
             name: workout.name,
             description: workout.description,
@@ -71,29 +79,32 @@ export const updateWorkout = (workout: Partial<Workout>) => {
         where: {
             id: workout.id
         }
-    })
-}
+    })),
+    Effect.flatMap((data) => Effect.succeed({ message: 'success fully updated workout', data }))
+)
 
-export const deleteWorkout = (id: string | undefined) => {
-    return prisma.workout.delete({
-        where: {
-            id: id
-        }
-    })
-}
+export const deleteWorkout = (id: string | null) => pipe(
+    Effect.tryPromise({
+        try: () => prisma.workout.delete({
+            where: {
+                id: id || ''
+            }
+        }),
+        catch: (error) => new DeleteWorkoutsPrismaError(JSON.stringify(error))
+    }),
+    Effect.flatMap(() => Effect.succeed({ message: 'success fully deleted'}))
+)
 
-export const getAllGoals = (user: string | undefined) => {
-    return prisma.workoutGoal.findMany({
-        where: {
-            userId: user,
-        }
-    })
-}
+export const getAllGoals = (user: string | undefined) => Effect.tryPromise(() => prisma.workoutGoal.findMany({
+    where: {
+        userId: user,
+    }
+}))
 
 
 
-export const createWorkoutGoal = (goal: WorkoutGoal)=> {
-    return prisma.workoutGoal.create({
+export const createWorkoutGoal = (goal: WorkoutGoal)=> pipe(
+    Effect.tryPromise(() => prisma.workoutGoal.create({
         data: {
             name: goal.name,
             userId: goal.userId,
@@ -103,11 +114,12 @@ export const createWorkoutGoal = (goal: WorkoutGoal)=> {
             beginDate: goal.beginDate?.toISOString(),
             endDate: goal.endDate?.toISOString()
         }
-    })
-}
+    })),
+    Effect.flatMap(data => Effect.succeed({message: 'success fully created workout goal', data}))
+)
 
-export const updateWorkoutGoal = (goal: Partial<WorkoutGoal>)=> {
-    return prisma.workoutGoal.update({
+export const updateWorkoutGoal = (goal: Partial<WorkoutGoal>)=> pipe(
+    Effect.tryPromise(() => prisma.workoutGoal.update({
         data: {
             name: goal.name,
             description: goal.description,
@@ -119,30 +131,32 @@ export const updateWorkoutGoal = (goal: Partial<WorkoutGoal>)=> {
         where: {
             id: goal.id
         }
-    })
-}
+    })),
+    Effect.flatMap(data => Effect.succeed({message: 'success fully updated workout goal', data}))
+)
 
-export const deleteWorkoutGoal = (id: string | undefined) => {
-    return prisma.workoutGoal.delete({
+export const deleteWorkoutGoal = (id: string | null) => pipe(
+    Effect.tryPromise(() => prisma.workoutGoal.delete({
         where: {
-            id: id
+            id: id || ''
         }
-    })
-}
+    })),
+    Effect.flatMap(() => Effect.succeed({message: 'success fully deleted workout goal'}))
+)
 
-export const getAllWorkoutTypes = (userId: string | undefined) => {
-    return prisma.workoutTypes.findMany({
-        where: {
-            userId: userId
-        }
-    })
-}
+export const getAllWorkoutTypes = (userId: string | undefined) => Effect.tryPromise(() =>  prisma.workoutTypes.findMany({
+    where: {
+        userId: userId
+    }
+}))
 
-export const createWorkoutType = (workoutType: WorkoutTypes) => {
-    return prisma.workoutTypes.create({
+export const createWorkoutType = (workoutType: WorkoutTypes) => pipe(
+    Effect.tryPromise(() => prisma.workoutTypes.create({
         data: {
             userId: workoutType.userId,
             name: workoutType.name,
         }
-    })
-}
+    })),
+
+    Effect.flatMap(data => Effect.succeed({message: 'success fully created new workout type', data }))
+)

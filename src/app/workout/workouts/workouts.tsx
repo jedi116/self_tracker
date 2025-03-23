@@ -1,22 +1,13 @@
 import {Box} from '@mui/material'
 import * as React from "react";
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import {useContext} from "react";
-import {WorkoutContext} from "@/context/workout";
-import {styles} from "@/app/workout/styles";
+import { DataGrid } from '@mui/x-data-grid';
 
-const columnDef:  GridColDef[] = [
-    {field: 'goal', headerName: 'Goal', width: 200, headerClassName: 'custom-header'},
-    {field: 'name', headerName: 'Name', width: 200, headerClassName: 'custom-header'},
-    {field: 'description', headerName: 'Description', width: 300, headerClassName: 'custom-header'},
-    {field: 'sets', headerName: 'Sets', headerClassName: 'custom-header'},
-    {field: 'reps', headerName: 'Reps', headerClassName: 'custom-header'},
-    {field: 'duration', headerName: 'Duration', headerClassName: 'custom-header'},
-    {field: 'date', headerName: 'Date', headerClassName: 'custom-header', width: 300}
-]
+import {styles} from "@/app/workout/styles";
+import {useWorkouts} from "@/app/workout/hooks/workouts.hooks";
+
 
 export default function Workouts() {
-    const context = useContext(WorkoutContext)
+    const {workouts, columnDef} = useWorkouts()
     return (
         <Box
             sx={{ height: 500,
@@ -29,7 +20,7 @@ export default function Workouts() {
                 }}}
         >
             <DataGrid
-                rows={context.workouts}
+                rows={workouts}
                 columns={columnDef}
                 pageSizeOptions={[5, 10, 20]}
                 disableRowSelectionOnClick

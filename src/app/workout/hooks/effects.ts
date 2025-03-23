@@ -127,3 +127,26 @@ export const createOrEditWorkoutTypes = (data: {name?: string} | null, method: '
         catch: () => new ParseError('Error parsing workout type response json')
     }))
 )
+
+export const deleteWorkout = (id: string) => pipe(
+    Effect.tryPromise({
+        try: () => fetch(`api/workout/workouts?id=${id}`, {method: 'DELETE'}),
+        catch: (error) => new FetchError(500, String(error))
+    }),
+    Effect.flatMap(response => Effect.tryPromise({
+        try: async () => {
+            const body = await response.json()
+            const {ok, status} = response
+            return {
+                ok,
+                body,
+                status
+            }
+        },
+        catch: () => new ParseError(`http status text: ${response.statusText}`)
+    })),
+    Effect.flatMap(response => response.ok ?
+        Effect.succeed(response):
+        Effect.fail(new FetchError(response.status, JSON.stringify(response.body)))
+    )
+)

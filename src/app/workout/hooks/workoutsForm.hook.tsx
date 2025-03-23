@@ -3,14 +3,19 @@ import {WorkoutContext} from "@/context/workout";
 import Workout from "@/types/Workout";
 import {Effect, pipe} from "effect"
 import {createOrEditWorkouts} from "@/app/workout/hooks/effects";
+import {WorkoutFormContext} from "@/context/workout/form";
 
 type DropdownOption = {value: string | null | undefined, label: string | null | undefined}
 
 export const useWorkoutsForm = () => {
-    const [error, setError] = React.useState<string | null>(null)
     const context = React.useContext(WorkoutContext)
+    const formContext = React.useContext(WorkoutFormContext)
+    const [error, setError] = React.useState<string | null>(null)
     const [goalOptions, setGoalOptions] = React.useState<DropdownOption[]>([])
     const [nameOptions, setNameOptions] = React.useState<DropdownOption[]>([])
+    const [values, setValues] = React.useState<Partial<Workout>>({
+        ...formContext.selectedWorkout
+    })
     React.useEffect(() => {
         setGoalOptions(context.goals.map(goal => {
             return {
@@ -25,9 +30,7 @@ export const useWorkoutsForm = () => {
             }
         }))
     }, [context.goals, context.workoutTypes])
-    const [values, setValues] = React.useState<Partial<Workout>>({
-        name: ''
-    })
+
     const handleChange = (prop: keyof Workout) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [prop]: event.target.value });
     };
@@ -51,9 +54,9 @@ export const useWorkoutsForm = () => {
     const handleSubmit = async() => {
         if (validateData(values)) {
             await pipe(
-                createOrEditWorkouts(values, 'POST'),
+                createOrEditWorkouts(values, formContext.workoutFormType === 'create' ? 'POST' : 'PUT'),
                 Effect.match({
-                    onSuccess: (response) => {
+                    onSuccess: () => {
                         setError(null)
                         if(context.refreshWorkouts) context.refreshWorkouts()
                         if (context.updateWorkoutContext) context.updateWorkoutContext((prevState) => ({

@@ -12,17 +12,19 @@ import WorkoutGoal from "@/types/WorkoutGoal";
 import {WorkoutProvider} from "@/context/workout"
 import {WorkoutFormProvider} from "@/context/workout/form";
 import {WorkoutTypes} from "@/types/WorkoutTypes";
+import Workout from "@/types/Workout";
+import {Effect} from "effect";
 
 
 
-export default async function Workout() {
+export default async function WorkoutPage() {
     const session = await auth()
     if (!session || !session.user) {
         redirect('/auth/signin')
     }
-    const workouts = await getAllWorkouts(session.user?.id)
-    const goals: WorkoutGoal[] = await getAllGoals(session.user?.id)
-    const workoutTypes: Partial<WorkoutTypes> [] = await getAllWorkoutTypes(session.user?.id)
+    const workouts: Workout[] = await Effect.runPromise(getAllWorkouts(session.user?.id))
+    const goals: WorkoutGoal[] = await Effect.runPromise(getAllGoals(session.user?.id))
+    const workoutTypes: Partial<WorkoutTypes> [] = await Effect.runPromise(getAllWorkoutTypes(session.user?.id))
     return (
         <Box
             sx={{height: '100vh', flexGrow: 1}}

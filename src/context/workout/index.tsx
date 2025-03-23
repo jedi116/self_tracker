@@ -33,8 +33,7 @@ export const WorkoutContext = createContext<WorkoutContextType>({
     workoutTypes: []
 })
 
-export const WorkoutProvider = ({
-                                    children,
+export const WorkoutProvider = ({children,
     goals,
     workouts,
     workoutTypes
