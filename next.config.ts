@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { randomBytes } from 'crypto'
 
 const nextConfig: NextConfig = {
   /* config options here */

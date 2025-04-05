@@ -67,7 +67,7 @@ body {
 
 
 .shadow-dance-text {
-  font-size: 10rem;
+  font-size: 2rem;
   color: #fff;
   text-shadow: 5px 5px 0 #ff7700, 10px 10px 0 #109bb6;
   animation: shadow-dance 2s infinite;
