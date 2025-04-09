@@ -1,49 +1,50 @@
-'use client'
+'use client';
 import React, { createContext, useState, ReactNode } from 'react';
-import WorkoutPlan from "@/types/WorkoutPlan";
-import WorkoutGoal from "@/types/WorkoutGoal"
-import Workout from "@/types/Workout";
+import WorkoutPlan from '@/types/WorkoutPlan';
+import WorkoutGoal from '@/types/WorkoutGoal';
+import Workout from '@/types/Workout';
 
 type WorkoutFormContextType = {
-    selectedPlan: WorkoutPlan | null,
-    selectedGoal: WorkoutGoal | null,
-    selectedWorkout: Workout | null,
-    planFormType: 'create' | 'edit' | null,
-    goalFormType: 'create' | 'edit' | null,
-    workoutFormType: 'create' | 'edit' | null,
-    setFormState?: React.Dispatch<React.SetStateAction<WorkoutFormContextType>>
+  selectedPlan: WorkoutPlan | null;
+  selectedGoal: WorkoutGoal | null;
+  selectedWorkout: Workout | null;
+  planFormType: 'create' | 'edit' | null;
+  goalFormType: 'create' | 'edit' | null;
+  workoutFormType: 'create' | 'edit' | null;
+  setFormState?: React.Dispatch<React.SetStateAction<WorkoutFormContextType>>;
 };
 
 type WorkoutFormContextProviderProps = {
-    children: ReactNode;
+  children: ReactNode;
 };
 
 export const WorkoutFormContext = createContext<WorkoutFormContextType>({
-    selectedPlan:  null,
-    selectedGoal:  null,
+  selectedPlan: null,
+  selectedGoal: null,
+  selectedWorkout: null,
+  planFormType: 'create',
+  goalFormType: 'create',
+  workoutFormType: 'create',
+});
+
+export const WorkoutFormProvider = ({ children }: WorkoutFormContextProviderProps) => {
+  const [formState, setFormState] = useState<WorkoutFormContextType>({
+    selectedPlan: null,
+    selectedGoal: null,
     selectedWorkout: null,
     planFormType: 'create',
     goalFormType: 'create',
-    workoutFormType: 'create'
-})
+    workoutFormType: 'create',
+  });
 
-export const WorkoutFormProvider = ({children}: WorkoutFormContextProviderProps) => {
-    const [formState, setFormState] = useState<WorkoutFormContextType>({
-        selectedPlan:  null,
-        selectedGoal:  null,
-        selectedWorkout: null,
-        planFormType: 'create',
-        goalFormType: 'create',
-        workoutFormType: 'create'
-    });
-
-
-    return (
-        <WorkoutFormContext.Provider value={{
-            ...formState,
-            setFormState
-        }}>
-            {children}
-        </WorkoutFormContext.Provider>
-    )
-}
+  return (
+    <WorkoutFormContext.Provider
+      value={{
+        ...formState,
+        setFormState,
+      }}
+    >
+      {children}
+    </WorkoutFormContext.Provider>
+  );
+};

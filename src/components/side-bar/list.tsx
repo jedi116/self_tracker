@@ -1,24 +1,29 @@
-'use client'
-import {ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material'
-import {redirect} from "next/navigation";
-import * as React from "react";
+'use client';
+import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import * as React from 'react';
 
 type SideBarListProps = {
-    name: string,
-    icon: React.JSX.Element,
-    link: string
-}
+  name: string;
+  icon: React.JSX.Element;
+  link: string;
+};
 
-export default function SideBarList({name, icon, link}: SideBarListProps) {
+export default function SideBarList({ name, icon, link }: SideBarListProps) {
+  const router = useRouter();
 
-    return (
-        <ListItem key={name} disablePadding>
-            <ListItemButton onClick={() => redirect(link)}>
-                <ListItemIcon>
-                    {icon}
-                </ListItemIcon>
-                <ListItemText primary={name} />
-            </ListItemButton>
-        </ListItem>
-    );
+  const handleNavigation = () => {
+    if (link && link !== '#') {
+      router.push(link);
+    }
+  };
+
+  return (
+    <ListItem key={name} disablePadding>
+      <ListItemButton onClick={handleNavigation}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={name} />
+      </ListItemButton>
+    </ListItem>
+  );
 }

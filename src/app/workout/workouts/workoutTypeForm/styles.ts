@@ -1,0 +1,40 @@
+export const workoutTypeFormStyles = {
+  form: {
+    p: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 2,
+    alignItems: 'center',
+  },
+  inputLabel: {
+    fontSize: '16px',
+    color: 'white',
+  },
+  input: {
+    fontSize: '16px',
+    backgroundColor: 'rgba(101, 184, 203, 0.1) !important',
+    color: 'white !important',
+    p: 1,
+    borderRadius: '4px',
+    width: '100%',
+    '&:hover': { backgroundColor: 'rgba(101, 184, 203, 0.2) !important' },
+    '&:focus': { backgroundColor: 'rgba(101, 184, 203, 0.25) !important' },
+  },
+  helperText: {
+    fontSize: '12px',
+    color: 'rgba(255,255,255,0.7)',
+  },
+  button: {
+    backgroundColor: '#65b8cb !important',
+    color: 'white !important',
+    '&.MuiButton-root:hover': { backgroundColor: '#4a98ab !important' },
+    borderRadius: '4px !important',
+    padding: '8px 16px !important',
+    marginTop: '10px !important',
+    fontSize: '15px',
+    fontFamily: 'SaiyanFont, sans-serif',
+    textTransform: 'none',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2) !important',
+    width: '80%',
+  },
+};

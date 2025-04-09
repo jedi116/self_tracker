@@ -1,5 +1,5 @@
 export interface PassPhrase {
-    value: string
-    active: boolean
-    timestamp: Date
+  value: string;
+  active: boolean;
+  timestamp: Date;
 }
