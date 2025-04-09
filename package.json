@@ -7,7 +7,9 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "fix": "eslint . --fix"
+    "fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.3",
@@ -19,10 +21,13 @@
     "@mui/material-nextjs": "^6.1.6",
     "@mui/x-data-grid": "^7.23.2",
     "@prisma/client": "^6.4.1",
-    "next": "15.0.3",
+    "effect": "^3.14.0",
+    "motion": "^12.6.2",
+    "next": "^15.2.4",
     "next-auth": "^5.0.0-beta.25",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "recharts": "^2.15.2"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -30,9 +35,14 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
+    "prettier": "^3.5.3",
     "postcss": "^8",
     "prisma": "^6.4.1",
+    "supabase": "^2.19.7",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "volta": {
+    "node": "22.14.0"
   }
 }

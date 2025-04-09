@@ -1,206 +1,180 @@
-import React from 'react'
+import React from 'react';
 import {
-    Accordion, AccordionDetails, AccordionSummary,
-    Box,
-    Button,
-    FormControl,
-    FormHelperText,
-    Input,
-    InputLabel,
-    MenuItem,
-    Select,
-    Typography
-} from '@mui/material'
-import Alert from "@mui/material/Alert";
-import ErrorIcon from "@mui/icons-material/Error";
-import {WorkoutTypeForm} from "@/app/workout/workouts/workoutTypeForm";
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from '@mui/material';
+import Alert from '@mui/material/Alert';
+import ErrorIcon from '@mui/icons-material/Error';
+import { WorkoutTypeForm } from '@/app/workout/workouts/workoutTypeForm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {useWorkoutsForm} from "@/app/workout/hooks/workoutsForm.hook";
+import { useWorkoutsForm } from '@/app/workout/hooks/workoutsForm.hook';
+import { formStyles } from '@/app/workout/forms/styles';
 
-const inputFontSize = {fontSize: {xs: '10px!important', sm: '10px!important', md: '12px!important', lg: '15px!important'},}
-
-export default function WorkoutsForm () {
-    const {
-        handleChange,
-        handleSubmit,
-        error,
-        planOptions,
-        nameOptions,
-        values,
-        setValues
-    } = useWorkoutsForm()
-    return (
-        <Box
-            component="form"
-            sx={{
-                width: '600px',
-                height: "400px",
-                display: 'flex',
-                flexDirection: 'column',
-                overflowY: "auto",
-                overflowX: "auto",
-            }}
-            noValidate
-            autoComplete="off"
+export default function WorkoutsForm() {
+  const { handleChange, handleSubmit, error, nameOptions, values, setValues, goalOptions } =
+    useWorkoutsForm();
+  return (
+    <Box component="form" sx={formStyles.formContainer} noValidate autoComplete="off">
+      {error && (
+        <Alert severity="error" icon={<ErrorIcon />}>
+          {error}
+        </Alert>
+      )}
+      <Typography sx={formStyles.formTitle}>Create Workout Entry</Typography>
+      <FormControl sx={formStyles.formControl}>
+        <InputLabel id="goal-select-label" sx={formStyles.inputLabel}>
+          Workout Goal
+        </InputLabel>
+        <Select
+          labelId="goal-select-label"
+          id="goal-select"
+          value={values?.goalId}
+          label="goal"
+          onChange={event => {
+            setValues(prev => ({ ...prev, goalId: event.target.value }));
+          }}
+          sx={formStyles.select}
         >
-            {error && <Alert severity="error" icon={<ErrorIcon />}>{error}</Alert>}
-            <Typography
-                component="div"
-                sx={{fontSize: {xs: '25px!important', sm: '35px!important', md: '45px!important', lg: '70px!important'}, fontFamily: 'SaiyanFont!important'}}
+          {goalOptions.map(option => (
+            <MenuItem
+              key={option.value as string}
+              value={option.value as string}
+              sx={formStyles.menuItem}
             >
-                Create Workout Entry
-            </Typography>
-            <FormControl sx={{width: '80%'}}>
-                <InputLabel id="plan-select-label" sx={{fontSize: inputFontSize.fontSize}}>Plan</InputLabel>
-                <Select
-                    labelId="plan-select-label"
-                    id="plan-select"
-                    value={values?.plan}
-                    label="plan"
-                    onChange={(event: any) => {
-                        setValues((prev: any) => ({ ...prev, plan: event.target.value }));
-                    }}
-                    sx={{
-                        fontSize: inputFontSize.fontSize,
-                        backgroundColor: '#0a6e80 !important'
-                    }}
-                >
-                    {planOptions.map((option) => (
-                        <MenuItem key={option.value as string} value={option.value as string}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-            <FormControl sx={{width: '80%' , marginTop: '15px'}}>
-                <InputLabel id="name-select-label" sx={{fontSize: inputFontSize.fontSize}}>Workout Type</InputLabel>
-                <Select
-                    labelId="name-select-label"
-                    id="name-select"
-                    value={values?.name}
-                    label="name"
-                    onChange={(event: any) => {
-                        setValues((prev: any) => ({ ...prev, name: event.target.value }));
-                    }}
-                    sx={{
-                        fontSize: inputFontSize.fontSize,
-                        backgroundColor: '#0a6e80 !important'
-                    }}
-                >
-                    {nameOptions.map((option) => (
-                        <MenuItem key={option.value as string } value={option.value as string}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-            <Accordion sx={{ width: '80%' }}>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                >
-                    <Typography component="span">Add new work out type to list </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <WorkoutTypeForm />
-                </AccordionDetails>
-            </Accordion>
-            <FormControl>
-                <InputLabel htmlFor="workout-description-input" sx={{fontSize: inputFontSize.fontSize}}>Description</InputLabel>
-                <Input
-                    id="workout-description-input"
-                    aria-describedby="workout-description-input-text"
-                    value={values?.description}
-                    onChange={handleChange('description')}
-                    sx={{
-                        fontSize: inputFontSize.fontSize,
-                        backgroundColor: '#0a6e80 !important',
-                        width: '80%'
-                    }}
-                    multiline
-                    minRows={3}
-                    maxRows={6}
-                />
-                <FormHelperText id="workout-description-input-text" sx={{fontSize: '10px!important'}}>Enter description</FormHelperText>
-            </FormControl>
-            <FormControl>
-                <InputLabel htmlFor="workout-sets-input" sx={{fontSize: inputFontSize.fontSize}}></InputLabel>
-                <Input
-                    id="workout-sets-input"
-                    aria-describedby="workout-sets--input-text"
-                    value={values?.sets}
-                    onChange={handleChange('sets')}
-                    sx={{
-                        fontSize: inputFontSize.fontSize,
-                        backgroundColor: '#0a6e80 !important',
-                        width: '80%'
-                    }}
-                    type='number'
-                />
-                <FormHelperText id="workout-sets-input-text" sx={{fontSize: '10px!important'}}>Enter number of sets.</FormHelperText>
-            </FormControl>
-            <FormControl>
-                <InputLabel htmlFor="workout-reps-input" sx={{fontSize: inputFontSize.fontSize}}></InputLabel>
-                <Input
-                    id="workout-reps-input"
-                    aria-describedby="workout-reps-input-text"
-                    value={values?.reps}
-                    onChange={handleChange('reps')}
-                    sx={{
-                        fontSize: inputFontSize.fontSize,
-                        backgroundColor: '#0a6e80 !important',
-                        width: '80%'
-                    }}
-                    type='number'
-                />
-                <FormHelperText id="workout-reps-input-text" sx={{fontSize: '10px!important'}}>Enter number of reps.</FormHelperText>
-            </FormControl>
-            <FormControl>
-                <InputLabel htmlFor="workout-duration-input" sx={{fontSize: inputFontSize.fontSize}}></InputLabel>
-                <Input
-                    id="workout-duration-input"
-                    aria-describedby="workout-duration-input-text"
-                    value={values?.duration}
-                    onChange={handleChange('duration')}
-                    sx={{
-                        fontSize: inputFontSize.fontSize,
-                        backgroundColor: '#0a6e80 !important',
-                        width: '80%'
-                    }}
-                />
-                <FormHelperText id="workout-date-input-text" sx={{fontSize: '10px!important'}}>Enter Duration.</FormHelperText>
-            </FormControl>
-            <FormControl>
-                <Input
-                    id="goal-date-input"
-                    aria-describedby="goal-date-input-text"
-                    type={'date'}
-                    value={values?.date}
-                    onChange={handleChange('date')}
-                    sx={{
-                        fontSize: '17px!important',
-                        backgroundColor: '#0a6e80 !important',
-                        width: '50%'
-                    }}
-                />
-                <FormHelperText id="goal-date-input-text" sx={{fontSize: '10px!important'}}>Enter date.</FormHelperText>
-            </FormControl>
-            <Button
-                variant="contained"
-                sx={{
-                    backgroundColor: '#0AB5D2 !important',
-                    color: 'white !important',
-                    '&.MuiButton-root:hover': { backgroundColor: '#077d92 !important' },
-                    borderRadius: '2px !important',
-                    padding: '2px !important',
-                    marginTop: '10px !important',
-                    fontSize: inputFontSize.fontSize,
-                }}
-                onClick={handleSubmit}
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl sx={formStyles.formControl}>
+        <InputLabel id="name-select-label" sx={formStyles.inputLabel}>
+          Workout Type
+        </InputLabel>
+        <Select
+          labelId="name-select-label"
+          id="name-select"
+          value={values?.name}
+          label="name"
+          onChange={event => {
+            setValues(prev => ({ ...prev, name: event.target.value }));
+          }}
+          sx={formStyles.select}
+        >
+          {nameOptions.map(option => (
+            <MenuItem
+              key={option.value as string}
+              value={option.value as string}
+              sx={formStyles.menuItem}
             >
-                Submit
-            </Button>
-        </Box>
-    )
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <Accordion sx={formStyles.accordion}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography sx={formStyles.accordionTitle}>Add New Workout Type</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <WorkoutTypeForm />
+        </AccordionDetails>
+      </Accordion>
+      <FormControl sx={formStyles.formControl}>
+        <InputLabel htmlFor="workout-description-input" sx={formStyles.inputLabel}>
+          Description
+        </InputLabel>
+        <Input
+          id="workout-description-input"
+          aria-describedby="workout-description-input-text"
+          value={values?.description}
+          onChange={handleChange('description')}
+          sx={{ ...formStyles.input, ...formStyles.inputMediumWidth }}
+          multiline
+          minRows={3}
+          maxRows={6}
+        />
+        <FormHelperText id="workout-description-input-text" sx={formStyles.helperText}>
+          Enter description
+        </FormHelperText>
+      </FormControl>
+      <FormControl sx={formStyles.formControl}>
+        <InputLabel htmlFor="workout-sets-input" sx={formStyles.inputLabel}>
+          Sets
+        </InputLabel>
+        <Input
+          id="workout-sets-input"
+          aria-describedby="workout-sets--input-text"
+          value={values?.sets}
+          onChange={handleChange('sets')}
+          sx={{ ...formStyles.input, ...formStyles.inputStandardWidth }}
+          type="number"
+        />
+        <FormHelperText id="workout-sets-input-text" sx={formStyles.helperText}>
+          Enter number of sets.
+        </FormHelperText>
+      </FormControl>
+      <FormControl sx={formStyles.formControl}>
+        <InputLabel htmlFor="workout-reps-input" sx={formStyles.inputLabel}>
+          Reps
+        </InputLabel>
+        <Input
+          id="workout-reps-input"
+          aria-describedby="workout-reps-input-text"
+          value={values?.reps}
+          onChange={handleChange('reps')}
+          sx={{ ...formStyles.input, ...formStyles.inputStandardWidth }}
+          type="number"
+        />
+        <FormHelperText id="workout-reps-input-text" sx={formStyles.helperText}>
+          Enter number of reps.
+        </FormHelperText>
+      </FormControl>
+      <FormControl sx={formStyles.formControl}>
+        <InputLabel htmlFor="workout-duration-input" sx={formStyles.inputLabel}>
+          Duration
+        </InputLabel>
+        <Input
+          id="workout-duration-input"
+          aria-describedby="workout-duration-input-text"
+          value={values?.duration}
+          onChange={handleChange('duration')}
+          sx={{ ...formStyles.input, ...formStyles.inputStandardWidth }}
+        />
+        <FormHelperText id="workout-date-input-text" sx={formStyles.helperText}>
+          Enter Duration.
+        </FormHelperText>
+      </FormControl>
+      <FormControl sx={formStyles.formControl}>
+        <Typography sx={formStyles.dateLabel}>Date</Typography>
+        <Input
+          id="goal-date-input"
+          aria-describedby="goal-date-input-text"
+          type={'date'}
+          value={values?.date}
+          onChange={handleChange('date')}
+          sx={{ ...formStyles.input, ...formStyles.inputStandardWidth }}
+        />
+        <FormHelperText id="goal-date-input-text" sx={formStyles.helperText}>
+          Enter date.
+        </FormHelperText>
+      </FormControl>
+      <Button variant="contained" sx={formStyles.submitButton} onClick={handleSubmit}>
+        Save Workout
+      </Button>
+    </Box>
+  );
 }
