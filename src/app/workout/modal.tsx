@@ -11,7 +11,7 @@ interface WorkoutModalProps {
   name: string;
 }
 
-export default function WorkoutModal(props: WorkoutModalProps) {
+export default function WorkoutModal(props: Readonly<WorkoutModalProps>) {
   const { updateWorkoutContext } = useContext(WorkoutContext);
 
   const handleClose = () => {

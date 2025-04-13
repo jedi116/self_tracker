@@ -45,7 +45,7 @@ export const WorkoutProvider = ({
     goals,
     workouts: workouts.map((workout: Workout) => ({
       ...workout,
-      name: workoutTypes.find(d => d.id === workout.name)?.name || '',
+      name: workoutTypes.find(d => d.id === workout.name)?.name ?? '',
       date: new Date(workout.date).toISOString().split('T')[0],
     })),
     workoutTypes,

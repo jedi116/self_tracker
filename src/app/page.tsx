@@ -200,7 +200,7 @@ export default function Home() {
             >
               <Avatar
                 alt="user image"
-                src={session.user?.image || '/generic_user.jpg'}
+                src={session.user?.image ?? '/generic_user.jpg'}
                 sx={{ width: 40, height: 40 }}
               />
             </IconButton>

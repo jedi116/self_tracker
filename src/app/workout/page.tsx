@@ -15,7 +15,7 @@ import { styles } from './styles';
 
 export default async function WorkoutPage() {
   const session = await auth();
-  if (!session || !session.user) {
+  if (!session?.user) {
     redirect('/auth/signin');
   }
   const workouts: Workout[] = await Effect.runPromise(getAllWorkouts(session.user?.id));

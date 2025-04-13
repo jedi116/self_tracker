@@ -2,11 +2,11 @@ import { Box } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import * as React from 'react';
 
-type props = {
+type Props = {
   name: string;
   image: StaticImageData;
 };
-export default function HeroSection({ name, image }: props) {
+export default function HeroSection({ name, image }: Readonly<Props>) {
   return (
     <Box
       sx={{ height: '100vh', width: '100%' }}

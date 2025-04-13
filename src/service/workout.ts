@@ -66,7 +66,7 @@ export const createWorkout = (workout: Workout) =>
           reps: workout.reps,
           duration: workout.duration,
           workoutdate: workout.date,
-          goalId: workout.goalId as string,
+          goalId: workout.goalId,
           userid: workout.userid as string,
         },
       })
@@ -101,7 +101,7 @@ export const deleteWorkout = (id: string | null) =>
       try: () =>
         prisma.workout.delete({
           where: {
-            id: id || '',
+            id: id ?? '',
           },
         }),
       catch: error => new DeleteWorkoutsPrismaError(JSON.stringify(error)),
@@ -161,7 +161,7 @@ export const deleteWorkoutGoal = (id: string | null) =>
     Effect.tryPromise(() =>
       prisma.workoutGoal.delete({
         where: {
-          id: id || '',
+          id: id ?? '',
         },
       })
     ),

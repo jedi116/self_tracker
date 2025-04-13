@@ -9,7 +9,7 @@ type SideBarListProps = {
   link: string;
 };
 
-export default function SideBarList({ name, icon, link }: SideBarListProps) {
+export default function SideBarList({ name, icon, link }: Readonly<SideBarListProps>) {
   const router = useRouter();
 
   const handleNavigation = () => {

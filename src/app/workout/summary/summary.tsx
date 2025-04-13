@@ -30,7 +30,7 @@ export default function WorkoutSummary() {
 
   // Group workouts by type
   const workoutsByType = workouts.reduce((acc: Record<string, Workout[]>, workout) => {
-    const typeName = workout.name || 'Unknown';
+    const typeName = workout.name ?? 'Unknown';
     if (!acc[typeName]) {
       acc[typeName] = [];
     }
@@ -46,10 +46,10 @@ export default function WorkoutSummary() {
           typeof workout.date === 'string'
             ? workout.date
             : new Date(workout.date).toISOString().split('T')[0],
-        sets: workout.sets || 0,
-        reps: workout.reps || 0,
-        duration: workout.duration || '0',
-        name: workout.name || 'Unknown',
+        sets: workout.sets ?? 0,
+        reps: workout.reps ?? 0,
+        duration: workout.duration ?? '0',
+        name: workout.name ?? 'Unknown',
       }))
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   };
@@ -91,8 +91,8 @@ export default function WorkoutSummary() {
         }
 
         acc[weekKey].workoutCount += 1;
-        acc[weekKey].totalSets += workout.sets || 0;
-        acc[weekKey].totalReps += workout.reps || 0;
+        acc[weekKey].totalSets += workout.sets ?? 0;
+        acc[weekKey].totalReps += workout.reps ?? 0;
 
         return acc;
       },
@@ -119,8 +119,8 @@ export default function WorkoutSummary() {
     const latestWorkout = sortedWorkouts[0];
     const previousWorkout = sortedWorkouts[1];
 
-    const setsDiff = previousWorkout ? (latestWorkout.sets || 0) - (previousWorkout.sets || 0) : 0;
-    const repsDiff = previousWorkout ? (latestWorkout.reps || 0) - (previousWorkout.reps || 0) : 0;
+    const setsDiff = previousWorkout ? (latestWorkout.sets ?? 0) - (previousWorkout.sets ?? 0) : 0;
+    const repsDiff = previousWorkout ? (latestWorkout.reps ?? 0) - (previousWorkout.reps ?? 0) : 0;
 
     return {
       type,

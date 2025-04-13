@@ -9,7 +9,7 @@ import '@/app/globals.css';
 import { AuthProvider } from '@/context/auth';
 import { Box } from '@mui/material';
 
-export default function RootLayout(props: { children: React.ReactNode }) {
+export default function RootLayout(props: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body style={{ margin: 0, height: '100vh', display: 'flex', flexDirection: 'column' }}>
