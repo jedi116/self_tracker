@@ -66,7 +66,37 @@ The project uses SonarCloud for continuous code quality analysis:
 - **Duplications**: Detects code duplication
 - **Complexity Analysis**: Monitors code complexity
 
-SonarCloud analysis runs automatically on pull requests and pushes to the main branches.
+#### SonarScanner Setup
+
+To run the Sonar analysis locally:
+
+1. Install SonarScanner:
+   ```bash
+   # On macOS
+   brew install sonar-scanner
+
+   # On Linux
+   wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+   unzip sonar-scanner-cli-4.8.0.2856-linux.zip
+   export PATH=$PATH:/path/to/sonar-scanner-4.8.0.2856-linux/bin
+
+   # On Windows
+   # Download from https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/
+   # Add the bin directory to your PATH
+   ```
+
+2. Create a token in SonarCloud
+3. Set the token locally:
+   ```bash
+   export SONAR_TOKEN=your_token_here
+   ```
+
+4. Run the analysis:
+   ```bash
+   yarn sonar
+   ```
+
+SonarCloud analysis runs automatically on pull requests and pushes to the main branches via GitHub Actions.
 
 ## Features
 
