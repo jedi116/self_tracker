@@ -29,6 +29,13 @@ export const dashboardStyles = {
     flex: 1,
     mb: 4,
   },
+  featureGridChild: {
+    width: {
+      xs: '100%',
+      sm: '50%',
+      md: '33.333%'
+    }
+  },
   quoteContainer: {
     p: 3,
     borderRadius: 2,

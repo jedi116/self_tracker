@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Typography, Paper, Avatar, Grid, Divider, Button, Chip } from '@mui/material';
-import { useState } from 'react';
+import { Box, Typography, Paper, Avatar, Stack, Divider, Button, Chip } from '@mui/material';
 import { motion } from 'motion/react';
 import { profileStyles } from './styles';
 import { useAuthRedirect } from '@/hooks/useAuthRedirect';
@@ -70,14 +69,14 @@ export default function Profile() {
     <Box sx={profileStyles.container}>
       <Paper elevation={1} sx={profileStyles.headerPaper}>
         <Typography sx={profileStyles.headerTitle}>User Profile</Typography>
-        <Typography sx={profileStyles.headerSubtitle} paragraph>
+        <Typography sx={profileStyles.headerSubtitle} sx={{ mb: 2 }}>
           View and manage your personal information, achievements, and progress.
         </Typography>
       </Paper>
 
-      <Grid container spacing={3}>
+      <Stack direction="row" spacing={3} flexWrap={{ xs: 'wrap', md: 'nowrap' }}>
         {/* User Profile Card */}
-        <Grid item xs={12} md={4}>
+        <Box sx={{ width: { xs: '100%', md: '33.33%' } }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -167,10 +166,10 @@ export default function Profile() {
               </Button>
             </Paper>
           </motion.div>
-        </Grid>
+        </Box>
 
         {/* Achievements Section */}
-        <Grid item xs={12} md={8}>
+        <Box sx={{ width: { xs: '100%', md: '66.67%' } }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -187,9 +186,14 @@ export default function Profile() {
                 Achievements
               </Typography>
 
-              <Grid container spacing={2}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                 {achievements.map((achievement, index) => (
-                  <Grid item xs={12} sm={6} md={4} key={achievement.id}>
+                  <Box 
+                    key={achievement.id} 
+                    sx={{ 
+                      width: { xs: '100%', sm: 'calc(50% - 8px)', md: 'calc(33.33% - 11px)' } 
+                    }}
+                  >
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -263,80 +267,85 @@ export default function Profile() {
                         )}
                       </Paper>
                     </motion.div>
-                  </Grid>
+                  </Box>
                 ))}
-              </Grid>
-            </Paper>
-          </motion.div>
-        </Grid>
-
-        {/* Stats Section */}
-        <Grid item xs={12}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-          >
-            <Paper
-              elevation={1}
-              sx={{
-                p: 3,
-                borderRadius: 2,
-              }}
-            >
-              <Typography variant="h5" sx={{ mb: 3 }}>
-                Activity Summary
-              </Typography>
-
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2 }}>
-                    <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
-                      12
-                    </Typography>
-                    <Typography variant="body1">Workouts Completed</Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2 }}>
-                    <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
-                      3
-                    </Typography>
-                    <Typography variant="body1">Meditation Sessions</Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2 }}>
-                    <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
-                      7
-                    </Typography>
-                    <Typography variant="body1">Days Streak</Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Box sx={{ textAlign: 'center', p: 2 }}>
-                    <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
-                      5
-                    </Typography>
-                    <Typography variant="body1">Goals Completed</Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-
-              <Divider sx={{ my: 3 }} />
-
-              <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
-                  "Continuous improvement is better than delayed perfection."
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  Keep pushing your limits, {session?.user?.name?.split(' ')[0] || 'User'}!
-                </Typography>
               </Box>
             </Paper>
           </motion.div>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
+
+      {/* Stats Section */}
+      <Box sx={{ width: '100%', mt: 3 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+        >
+          <Paper
+            elevation={1}
+            sx={{
+              p: 3,
+              borderRadius: 2,
+            }}
+          >
+            <Typography variant="h5" sx={{ mb: 3 }}>
+              Activity Summary
+            </Typography>
+
+            <Stack 
+              direction="row" 
+              spacing={3} 
+              flexWrap={{ xs: 'wrap', md: 'nowrap' }}
+              sx={{ mb: 3 }}
+            >
+              <Box sx={{ flex: 1, minWidth: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
+                <Box sx={{ textAlign: 'center', p: 2 }}>
+                  <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
+                    12
+                  </Typography>
+                  <Typography variant="body1">Workouts Completed</Typography>
+                </Box>
+              </Box>
+              <Box sx={{ flex: 1, minWidth: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
+                <Box sx={{ textAlign: 'center', p: 2 }}>
+                  <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
+                    3
+                  </Typography>
+                  <Typography variant="body1">Meditation Sessions</Typography>
+                </Box>
+              </Box>
+              <Box sx={{ flex: 1, minWidth: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
+                <Box sx={{ textAlign: 'center', p: 2 }}>
+                  <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
+                    7
+                  </Typography>
+                  <Typography variant="body1">Days Streak</Typography>
+                </Box>
+              </Box>
+              <Box sx={{ flex: 1, minWidth: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
+                <Box sx={{ textAlign: 'center', p: 2 }}>
+                  <Typography variant="h2" color="primary.main" sx={{ mb: 1 }}>
+                    5
+                  </Typography>
+                  <Typography variant="body1">Goals Completed</Typography>
+                </Box>
+              </Box>
+            </Stack>
+
+            <Divider sx={{ my: 3 }} />
+
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
+                "Continuous improvement is better than delayed perfection."
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                Keep pushing your limits, {session?.user?.name?.split(' ')[0] || 'User'}!
+              </Typography>
+            </Box>
+          </Paper>
+        </motion.div>
+      </Box>
     </Box>
   );
 }

@@ -13,9 +13,9 @@ type WorkoutContextType = {
   goals: WorkoutGoal[];
   workouts: Workout[];
   workoutTypes: Partial<WorkoutTypes>[];
-  refreshGoals?: () => void;
-  refreshWorkouts?: () => void;
-  refreshWorkoutTypes?: () => void;
+  refreshGoals?: () => Promise<void>;
+  refreshWorkouts?: () => Promise<void>;
+  refreshWorkoutTypes?: () => Promise<void>;
 };
 
 type WorkoutContextProviderProps = {

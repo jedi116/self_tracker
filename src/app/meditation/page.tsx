@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography, Paper, Divider, Grid } from '@mui/material';
+import { Box, Typography, Paper, Divider, Stack } from '@mui/material';
 import { pageStyles } from '@/app/shared/styles';
 import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 
@@ -13,21 +13,21 @@ export default function MeditationPage() {
         <Typography component="h1" variant="h4" sx={pageStyles.pageTitle}>
           Meditation Tracker
         </Typography>
-        <Typography variant="body1" color="text.secondary" paragraph>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
           Track your meditation sessions, build mental clarity, and maintain focus.
         </Typography>
       </Paper>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
+        <Box sx={{ width: { xs: '100%', md: '66.67%' } }}>
           <Paper elevation={1} sx={pageStyles.mainContent}>
             <Typography variant="h5" sx={pageStyles.subtitle}>
               Coming Soon
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography variant="body1" sx={{ mb: 2 }}>
               This feature is currently under development and will be available in a future update.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography variant="body1" sx={{ mb: 2 }}>
               The Meditation Tracker will allow you to:
             </Typography>
             <ul>
@@ -38,14 +38,14 @@ export default function MeditationPage() {
               <li>Access guided meditation resources</li>
             </ul>
           </Paper>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12} md={4}>
+        <Box sx={{ width: { xs: '100%', md: '33.33%' } }}>
           <Paper elevation={1} sx={pageStyles.sideContent}>
             <Typography variant="h6" sx={pageStyles.subtitle}>
               Benefits of Meditation
             </Typography>
-            <Typography variant="body2" paragraph>
+            <Typography variant="body2" sx={{ mb: 2 }}>
               Regular meditation practice can help:
             </Typography>
             <ul>
@@ -61,8 +61,8 @@ export default function MeditationPage() {
               our thoughts and our feelings.&quot;
             </Typography>
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
     </Box>
   );
 }

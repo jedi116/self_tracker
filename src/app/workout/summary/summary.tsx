@@ -12,7 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { Box, Typography, Grid, Paper } from '@mui/material';
+import { Box, Typography, Stack, Paper } from '@mui/material';
 import { WorkoutContext } from '@/context/workout';
 import Workout from '@/types/Workout';
 import { styles } from '../styles';
@@ -137,32 +137,37 @@ export default function WorkoutSummary() {
       </Typography>
 
       {/* Summary Cards */}
-      <Grid container spacing={3} sx={styles.summary.summaryCards}>
-        <Grid item xs={12} sm={6} md={3}>
+      <Stack 
+        direction="row" 
+        spacing={3} 
+        sx={styles.summary.summaryCards}
+        flexWrap={{ xs: 'wrap', sm: 'wrap', md: 'nowrap' }}
+      >
+        <Box sx={{ width: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
           <Paper sx={styles.summary.card}>
             <Typography variant="h6">Total Workouts</Typography>
             <Typography variant="h3">{totalWorkouts}</Typography>
           </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box sx={{ width: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
           <Paper sx={styles.summary.card}>
             <Typography variant="h6">Workout Types</Typography>
             <Typography variant="h3">{uniqueWorkoutTypes}</Typography>
           </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box sx={{ width: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
           <Paper sx={styles.summary.card}>
             <Typography variant="h6">Total Sets</Typography>
             <Typography variant="h3">{totalSets}</Typography>
           </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </Box>
+        <Box sx={{ width: { xs: '100%', sm: 'calc(50% - 12px)', md: '25%' } }}>
           <Paper sx={styles.summary.card}>
             <Typography variant="h6">Total Reps</Typography>
             <Typography variant="h3">{totalReps}</Typography>
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
 
       {/* Weekly Progress Chart */}
       <Typography variant="h5" sx={styles.summary.sectionTitle}>
@@ -214,9 +219,14 @@ export default function WorkoutSummary() {
       <Typography variant="h5" sx={styles.summary.sectionTitle}>
         Latest Progress Changes
       </Typography>
-      <Grid container spacing={2}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
         {progressByType.map(({ type, setsDiff, repsDiff }) => (
-          <Grid item xs={12} sm={6} md={4} key={type}>
+          <Box 
+            key={type} 
+            sx={{ 
+              width: { xs: '100%', sm: 'calc(50% - 8px)', md: 'calc(33.33% - 11px)' } 
+            }}
+          >
             <Paper sx={styles.summary.progressCard}>
               <Typography variant="h6" sx={styles.summary.workoutTypeTitle}>
                 {type}
@@ -234,9 +244,9 @@ export default function WorkoutSummary() {
                 </Typography>
               </Box>
             </Paper>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 }
