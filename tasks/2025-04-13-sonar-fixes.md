@@ -28,17 +28,21 @@
 ### JavaScript Best Practices Updates
 
 1. **Fixed Duplicate Props Issue**
+
    - Fixed duplicate sx props in Profile page Typography component
    - Properly merged styling using spread operator with combined styles
 
 2. **Removed Unused Imports**
+
    - Removed unused `useRef` import from `src/app/page.tsx`
    - Removed unused `AddToPhotosIcon` import from `src/app/workout/header.tsx`
 
 3. **Removed Unused Function**
+
    - Commented out unused `scrollToSection` function in `src/app/page.tsx`
 
 4. **Replace Logical OR with Nullish Coalescing**
+
    - Updated instances of `||` to `??` in:
      - Profile page (`src/app/profile/page.tsx`)
      - Landing page (`src/app/page.tsx`)

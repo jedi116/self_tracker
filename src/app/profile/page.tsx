@@ -69,7 +69,7 @@ export default function Profile() {
     <Box sx={profileStyles.container}>
       <Paper elevation={1} sx={profileStyles.headerPaper}>
         <Typography sx={profileStyles.headerTitle}>User Profile</Typography>
-        <Typography sx={{...profileStyles.headerSubtitle, mb: 2}}>
+        <Typography sx={{ ...profileStyles.headerSubtitle, mb: 2 }}>
           View and manage your personal information, achievements, and progress.
         </Typography>
       </Paper>
