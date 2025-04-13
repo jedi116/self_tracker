@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography, Paper, Divider, Grid } from '@mui/material';
+import { Box, Typography, Paper, Divider, Stack } from '@mui/material';
 import { pageStyles } from '@/app/shared/styles';
 import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 
@@ -13,21 +13,21 @@ export default function NoFapPage() {
         <Typography component="h1" variant="h4" sx={pageStyles.pageTitle}>
           NoFap Tracker
         </Typography>
-        <Typography variant="body1" color="text.secondary" paragraph>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
           Build inner strength and channel your energy toward positive transformation.
         </Typography>
       </Paper>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
+        <Box sx={{ width: { xs: '100%', md: '66.67%' } }}>
           <Paper elevation={1} sx={pageStyles.mainContent}>
             <Typography variant="h5" sx={pageStyles.subtitle}>
               Coming Soon
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography variant="body1" sx={{ mb: 2 }}>
               This feature is currently under development and will be available in a future update.
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography variant="body1" sx={{ mb: 2 }}>
               The NoFap Tracker will help you:
             </Typography>
             <ul>
@@ -38,14 +38,14 @@ export default function NoFapPage() {
               <li>Join a supportive community</li>
             </ul>
           </Paper>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12} md={4}>
+        <Box sx={{ width: { xs: '100%', md: '33.33%' } }}>
           <Paper elevation={1} sx={pageStyles.sideContent}>
             <Typography variant="h6" sx={pageStyles.subtitle}>
               Benefits of NoFap
             </Typography>
-            <Typography variant="body2" paragraph>
+            <Typography variant="body2" sx={{ mb: 2 }}>
               Many practitioners report benefits such as:
             </Typography>
             <ul>
@@ -61,8 +61,8 @@ export default function NoFapPage() {
               first step to mastering your potential.&quot;
             </Typography>
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Stack>
     </Box>
   );
 }

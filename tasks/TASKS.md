@@ -7,6 +7,7 @@ This file serves as the main index for tracking tasks and features in the Kaizen
 - [2024-04-13.md](./2024-04-13.md) - Initial features documentation
 - [2025-04-13-test-updates.md](./2025-04-13-test-updates.md) - Unit test improvements
 - [2025-04-13-sonar-integration.md](./2025-04-13-sonar-integration.md) - SonarCloud integration
+- [2025-04-13-sonar-fixes.md](./2025-04-13-sonar-fixes.md) - SonarCloud issue fixes
 
 ## How to Use
 

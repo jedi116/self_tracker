@@ -654,41 +654,6 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </Box>
-
-      {/* Custom CSS for animations */}
-      <style jsx global>{`
-        .power-level-progress::before {
-          background: linear-gradient(
-            90deg,
-            var(--power-color-start, #ffffff),
-            var(--power-color-end, #65b8cb)
-          ) !important;
-        }
-
-        .power-aura::before {
-          background: linear-gradient(45deg, #ffffff, #65b8cb, #ffffff) !important;
-        }
-
-        .shadow-dance-text {
-          text-shadow:
-            5px 5px 0 #003d4d,
-            10px 10px 0 #65b8cb !important;
-        }
-
-        @keyframes shadow-dance {
-          0%,
-          100% {
-            text-shadow:
-              5px 5px 0 #003d4d,
-              10px 10px 0 #65b8cb !important;
-          }
-          50% {
-            text-shadow:
-              -5px -5px 0 #003d4d,
-              -10px -10px 0 #65b8cb !important;
-          }
-        }
-      `}</style>
     </Box>
   );
 }
