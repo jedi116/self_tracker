@@ -51,9 +51,22 @@ Kaizen helps users track and improve various aspects of their lives:
 
 Run tests with:
 ```bash
-yarn test          # Run all tests
-yarn test:watch    # Run tests in watch mode
+yarn test           # Run all tests
+yarn test:watch     # Run tests in watch mode
+yarn test:coverage  # Run tests with coverage report
+yarn sonar          # Run tests with coverage and SonarCloud analysis
 ```
+
+### Code Quality
+
+The project uses SonarCloud for continuous code quality analysis:
+
+- **Static Code Analysis**: Identifies code smells, bugs, and vulnerabilities
+- **Test Coverage**: Tracks unit test coverage metrics
+- **Duplications**: Detects code duplication
+- **Complexity Analysis**: Monitors code complexity
+
+SonarCloud analysis runs automatically on pull requests and pushes to the main branches.
 
 ## Features
 
