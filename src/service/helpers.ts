@@ -40,7 +40,7 @@ export const processGenericRequest = <T>(
     ),
     Effect.catchAll(error =>
       Effect.succeed(
-        new Response(JSON.stringify({ error: errorMessage || error }), {
+        new Response(JSON.stringify({ error: errorMessage ?? error }), {
           status: 500,
           headers: { 'Content-Type': 'application/json' },
         })

@@ -36,7 +36,7 @@ export const useWorkouts = () => {
     if (formContext.setFormState)
       formContext.setFormState(prev => ({
         ...prev,
-        selectedWorkout: (parsedWorkout as any) || null,
+        selectedWorkout: (parsedWorkout as any) ?? null,
         workoutFormType: 'edit',
       }));
     if (context.updateWorkoutContext)

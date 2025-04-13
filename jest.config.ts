@@ -23,7 +23,7 @@ const config: Config = {
   },
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
-    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   transformIgnorePatterns: [
     // This pattern ensures that ESM modules are properly transformed by babel-jest
@@ -40,10 +40,10 @@ const config: Config = {
     '!src/**/*.test.{ts,tsx}',
     '!src/tests/**/*',
     '!**/node_modules/**',
-    '!**/vendor/**'
+    '!**/vendor/**',
   ],
   testTimeout: 15000,
-  verbose: true
+  verbose: true,
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

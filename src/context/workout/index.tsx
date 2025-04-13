@@ -94,7 +94,7 @@ export const WorkoutProvider = ({
             ...prevState,
             workouts: workouts.map((workout: Workout) => ({
               ...workout,
-              name: prevState.workoutTypes.find(d => d.id === workout.name)?.name || '',
+              name: prevState.workoutTypes.find(d => d.id === workout.name)?.name ?? '',
               date: new Date(workout.date).toISOString().split('T')[0],
             })),
           }));

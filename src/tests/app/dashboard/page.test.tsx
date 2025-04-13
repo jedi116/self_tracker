@@ -6,28 +6,28 @@ import { useAuthRedirect } from '@/hooks';
 
 // Only mock what's absolutely necessary - dependencies, not the component
 jest.mock('@/hooks', () => ({
-  useAuthRedirect: jest.fn()
+  useAuthRedirect: jest.fn(),
 }));
 
 // Mock motion for animations
 jest.mock('motion/react', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>
-  }
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+  },
 }));
 
 // Mock next/navigation
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
-    push: jest.fn()
-  })
+    push: jest.fn(),
+  }),
 }));
 
 describe('Dashboard Page', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (useAuthRedirect as jest.Mock).mockReturnValue({
-      session: { user: { name: 'Test User', image: '/test-image.jpg' } }
+      session: { user: { name: 'Test User', image: '/test-image.jpg' } },
     });
   });
 
@@ -43,7 +43,7 @@ describe('Dashboard Page', () => {
 
   it('renders all feature cards from features array', () => {
     render(<Dashboard />);
-    
+
     // Check each feature is rendered
     features.forEach(feature => {
       expect(screen.getByText(feature.title)).toBeInTheDocument();
@@ -53,8 +53,10 @@ describe('Dashboard Page', () => {
 
   it('renders the quote section', () => {
     render(<Dashboard />);
-    
-    expect(screen.getByText('"Continuous improvement is better than delayed perfection."')).toBeInTheDocument();
+
+    expect(
+      screen.getByText('"Continuous improvement is better than delayed perfection."')
+    ).toBeInTheDocument();
     expect(screen.getByText('Track your progress daily for best results')).toBeInTheDocument();
   });
 });

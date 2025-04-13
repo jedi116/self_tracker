@@ -408,9 +408,15 @@ export const styles = {
     metricLabel: {
       color: '#fff',
     },
-    getMetricValueStyle: (value: number) => ({
-      color: value > 0 ? '#4caf50' : value < 0 ? '#f44336' : '#fff',
-      fontWeight: 'bold',
-    }),
+    getMetricValueStyle: (value: number) => {
+      let color = '#fff';
+      if (value > 0) color = '#4caf50';
+      else if (value < 0) color = '#f44336';
+
+      return {
+        color,
+        fontWeight: 'bold',
+      };
+    },
   },
 };

@@ -6,16 +6,10 @@ import { WorkoutTypes } from '@/types/WorkoutTypes';
 
 class ErrorCreatingGoal extends Error {
   readonly _tag = 'ErrorCreatingGoal';
-  constructor(message: string) {
-    super(message);
-  }
 }
 
 class ErrorCreatingWorkout extends Error {
   readonly _tag = 'ErrorCreatingWorkout';
-  constructor(message: string) {
-    super(message);
-  }
 }
 
 export const deleteGoals = (id: string) =>

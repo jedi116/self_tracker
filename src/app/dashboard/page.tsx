@@ -17,7 +17,7 @@ export default function Dashboard() {
       </Paper>
 
       <Stack direction="row" flexWrap="wrap" spacing={3} sx={dashboardStyles.featuresGrid}>
-        {features.map((feature) => (
+        {features.map(feature => (
           <Box key={feature.title} sx={dashboardStyles.featureGridChild}>
             <FeatureCard
               title={feature.title}

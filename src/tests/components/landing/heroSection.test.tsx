@@ -6,24 +6,19 @@ import HeroSection from '@/components/landing/heroSection';
 jest.mock('next/image', () => ({
   __esModule: true,
   default: ({ src, alt, width, height }: any) => (
-    <img 
-      src={src} 
-      alt={alt} 
-      width={width} 
-      height={height}
-    />
-  )
+    <img src={src} alt={alt} width={width} height={height} />
+  ),
 }));
 
 describe('HeroSection Component', () => {
   const mockProps = {
     name: 'Test Hero',
-    image: '/test-image.jpg' as any // Cast to any to satisfy StaticImageData type
+    image: '/test-image.jpg' as any, // Cast to any to satisfy StaticImageData type
   };
 
   it('renders the hero image with correct props', () => {
     render(<HeroSection {...mockProps} />);
-    
+
     // Find the image
     const image = screen.getByRole('img');
     expect(image).toBeInTheDocument();
@@ -33,7 +28,7 @@ describe('HeroSection Component', () => {
 
   it('renders the hero name as heading', () => {
     render(<HeroSection {...mockProps} />);
-    
+
     expect(screen.getByText(mockProps.name)).toBeInTheDocument();
   });
 });

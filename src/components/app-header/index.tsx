@@ -11,10 +11,9 @@ import Image from 'next/image';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { Button } from '@mui/material';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import SideBar from '@/components/side-bar';
 import { useAuthSession } from '@/context/auth';
-import { usePathname } from 'next/navigation';
 import { headerStyles } from './styles';
 
 type AppBarProps = {
@@ -90,7 +89,7 @@ export default function MenuAppBar({ session }: AppBarProps) {
               onClick={handleMenu}
               color="inherit"
             >
-              <Avatar alt="user image" src={session.user?.image || '/generic_user.jpg'} />
+              <Avatar alt="user image" src={session.user?.image ?? '/generic_user.jpg'} />
             </IconButton>
             <Menu
               id="menu-appbar"

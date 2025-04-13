@@ -14,18 +14,21 @@
 ### Tests Updated
 
 1. **Home Page Test (`src/tests/app/page.test.tsx`)**
+
    - Now tests the actual Home component
    - Added proper mocking for next-auth, navigation, and auth context
    - Tests both authenticated and non-authenticated states
    - Verifies content rendering and button click navigation
 
 2. **Dashboard Page Test (`src/tests/app/dashboard/page.test.tsx`)**
+
    - Tests the actual Dashboard component
    - Properly mocks the auth hooks
    - Verifies all features from the real features array are rendered
    - Tests quote section and welcome message rendering
 
 3. **FeatureCard Component Test (`src/tests/app/dashboard/featureCard.test.tsx`)**
+
    - Tests the actual FeatureCard component with provided props
    - Verifies title, description, and icon rendering
    - Tests navigation when card is clicked
@@ -39,6 +42,7 @@
 ### Testing Best Practices Documented
 
 Created a comprehensive testing lessons document (`tasks/testing-lessons.md`) that outlines:
+
 - Proper approach to testing React components
 - Common mistakes to avoid
 - Best practices for testing Next.js applications

@@ -69,7 +69,7 @@ export default function Profile() {
     <Box sx={profileStyles.container}>
       <Paper elevation={1} sx={profileStyles.headerPaper}>
         <Typography sx={profileStyles.headerTitle}>User Profile</Typography>
-        <Typography sx={profileStyles.headerSubtitle} sx={{ mb: 2 }}>
+        <Typography sx={profileStyles.headerSubtitle}>
           View and manage your personal information, achievements, and progress.
         </Typography>
       </Paper>
@@ -188,10 +188,10 @@ export default function Profile() {
 
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                 {achievements.map((achievement, index) => (
-                  <Box 
-                    key={achievement.id} 
-                    sx={{ 
-                      width: { xs: '100%', sm: 'calc(50% - 8px)', md: 'calc(33.33% - 11px)' } 
+                  <Box
+                    key={achievement.id}
+                    sx={{
+                      width: { xs: '100%', sm: 'calc(50% - 8px)', md: 'calc(33.33% - 11px)' },
                     }}
                   >
                     <motion.div
@@ -293,9 +293,9 @@ export default function Profile() {
               Activity Summary
             </Typography>
 
-            <Stack 
-              direction="row" 
-              spacing={3} 
+            <Stack
+              direction="row"
+              spacing={3}
               flexWrap={{ xs: 'wrap', md: 'nowrap' }}
               sx={{ mb: 3 }}
             >

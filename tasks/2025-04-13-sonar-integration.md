@@ -40,11 +40,13 @@ Added SonarCloud integration to improve code quality monitoring and ensure consi
 ## Benefits
 
 1. **Improved Code Quality Monitoring**:
+
    - Automatic detection of code smells and bugs
    - Early identification of potential issues
    - Consistent code standards enforcement
 
 2. **Test Coverage Visibility**:
+
    - Clear metrics on test coverage percentage
    - Identification of untested code areas
    - Motivation to increase coverage

@@ -12,6 +12,7 @@ This file serves as the main index for tracking tasks and features in the Kaizen
 ## How to Use
 
 At the beginning of each Claude Code session, reference this directory to provide context on:
+
 - Previously implemented features
 - Current project state
 - Planned enhancements
@@ -21,6 +22,7 @@ Files are organized by date (YYYY-MM-DD[-description].md) to maintain chronologi
 ## Naming Convention
 
 Task files should follow this naming pattern:
+
 - Use format: `YYYY-MM-DD-brief-description.md`
 - Include the date at the beginning (YYYY-MM-DD)
 - Add a brief hyphenated description of the task/feature

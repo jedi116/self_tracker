@@ -67,7 +67,7 @@ const sideBarSecondaryList = [
   },
 ];
 
-export default function SideBar({ drawerOpen, setDrawerOpen }: SideBarProps) {
+export default function SideBar({ drawerOpen, setDrawerOpen }: Readonly<SideBarProps>) {
   const router = useRouter();
 
   const handleLogoClick = (e: React.MouseEvent) => {
@@ -79,7 +79,7 @@ export default function SideBar({ drawerOpen, setDrawerOpen }: SideBarProps) {
   return (
     <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} sx={sidebarStyles.drawer}>
       {
-        <Box sx={sidebarStyles.box} role="presentation" onClick={() => setDrawerOpen(false)}>
+        <Box sx={sidebarStyles.box} onClick={() => setDrawerOpen(false)}>
           <List>
             <Box sx={sidebarStyles.logoContainer}>
               <Image

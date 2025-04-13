@@ -19,9 +19,8 @@ export const AuthProvider = ({ children }: AuthContextProviderProps) => {
   const setSessionValue = (value: Session | null) => {
     setSession(value);
   };
-  return (
-    <AuthContext.Provider value={{ session, setSessionValue }}>{children}</AuthContext.Provider>
-  );
+  const memoizedContextValues = React.useMemo(() => ({ session, setSessionValue }), [session]);
+  return <AuthContext.Provider value={memoizedContextValues}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthSession = () => {

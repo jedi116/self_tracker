@@ -30,7 +30,7 @@ export const useGoals = () => {
     if (formContext.setFormState)
       formContext.setFormState(prev => ({
         ...prev,
-        selectedGoal: (parsedGoal as any) || null,
+        selectedGoal: (parsedGoal as any) ?? null,
         goalFormType: 'edit',
       }));
     if (context.updateWorkoutContext)
