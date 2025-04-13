@@ -137,9 +137,9 @@ export default function WorkoutSummary() {
       </Typography>
 
       {/* Summary Cards */}
-      <Stack 
-        direction="row" 
-        spacing={3} 
+      <Stack
+        direction="row"
+        spacing={3}
         sx={styles.summary.summaryCards}
         flexWrap={{ xs: 'wrap', sm: 'wrap', md: 'nowrap' }}
       >
@@ -221,10 +221,10 @@ export default function WorkoutSummary() {
       </Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
         {progressByType.map(({ type, setsDiff, repsDiff }) => (
-          <Box 
-            key={type} 
-            sx={{ 
-              width: { xs: '100%', sm: 'calc(50% - 8px)', md: 'calc(33.33% - 11px)' } 
+          <Box
+            key={type}
+            sx={{
+              width: { xs: '100%', sm: 'calc(50% - 8px)', md: 'calc(33.33% - 11px)' },
             }}
           >
             <Paper sx={styles.summary.progressCard}>

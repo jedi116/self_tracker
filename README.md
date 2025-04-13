@@ -50,6 +50,7 @@ Kaizen helps users track and improve various aspects of their lives:
 ### Testing
 
 Run tests with:
+
 ```bash
 yarn test           # Run all tests
 yarn test:watch     # Run tests in watch mode
@@ -71,6 +72,7 @@ The project uses SonarCloud for continuous code quality analysis:
 To run the Sonar analysis locally:
 
 1. Install SonarScanner:
+
    ```bash
    # On macOS
    brew install sonar-scanner
@@ -87,6 +89,7 @@ To run the Sonar analysis locally:
 
 2. Create a token in SonarCloud
 3. Set the token locally:
+
    ```bash
    export SONAR_TOKEN=your_token_here
    ```
@@ -101,22 +104,26 @@ SonarCloud analysis runs automatically on pull requests and pushes to the main b
 ## Features
 
 ### Authentication
+
 - NextAuth integration for secure user authentication
 - Sign-in page with custom styling
 - Authentication failure handling
 
 ### Dashboard
+
 - Main dashboard with feature cards
 - Navigation to different self-improvement areas
 - Power level indicators for progress visualization
 
 ### Workout Tracking
+
 - Create, view and update workouts
 - Set and track workout goals
 - Configure workout types
 - View progress summaries
 
 ### UI Components
+
 - Responsive app header with session integration
 - Sidebar navigation with Dragon Ball Z themed styling
 - Landing page with hero section and transformation journey

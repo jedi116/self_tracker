@@ -22,6 +22,7 @@ export const profileStyles = {
     fontFamily: 'SaiyanFont, sans-serif',
     color: 'rgba(255,255,255,0.7)',
     fontSize: '1.1rem',
+    mb: 2,
   },
   profileCard: {
     p: 3,

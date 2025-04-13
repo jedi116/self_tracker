@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 const render = (ui: React.ReactElement) => {
   return {
     ...rtlRender(ui),
-    user: userEvent.setup()
+    user: userEvent.setup(),
   };
 };
 

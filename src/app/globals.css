@@ -18,7 +18,10 @@
 }
 
 body {
-  font-family: SaiyanFont, SaiyanFontLeftOblique, SaiyanFontRightOblique ui-rounded;
+  font-family:
+    SaiyanFont,
+    SaiyanFontLeftOblique,
+    SaiyanFontRightOblique ui-rounded;
 }
 
 .wave-container {
