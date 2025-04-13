@@ -7,7 +7,7 @@ export const useWorkoutTypeForm = () => {
   const [error, setError] = React.useState<string | null>(null);
   const [message, setMessage] = React.useState<string | null>(null);
   const context = React.useContext(WorkoutContext);
-  const [values, setValues] = React.useState<{ name?: string | undefined }>();
+  const [values, setValues] = React.useState<{ name?: string }>();
   const handleChange = (prop: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value });
     setError(null);
@@ -15,7 +15,7 @@ export const useWorkoutTypeForm = () => {
   };
 
   const handleSubmit = async () => {
-    if (values && values.name) {
+    if (values?.name) {
       await pipe(
         createOrEditWorkoutTypes(values, 'POST'),
         Effect.match({

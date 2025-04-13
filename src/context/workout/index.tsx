@@ -105,18 +105,15 @@ export const WorkoutProvider = ({
       }),
       Effect.runPromise
     );
-
-  return (
-    <WorkoutContext.Provider
-      value={{
-        ...modalStates,
-        updateWorkoutContext: setModalStates,
-        refreshGoals,
-        refreshWorkoutTypes,
-        refreshWorkouts,
-      }}
-    >
-      {children}
-    </WorkoutContext.Provider>
+  const memoizedContextValue = React.useMemo(
+    () => ({
+      ...modalStates,
+      updateWorkoutContext: setModalStates,
+      refreshGoals,
+      refreshWorkoutTypes,
+      refreshWorkouts,
+    }),
+    [modalStates, refreshGoals, refreshWorkoutTypes, refreshWorkouts]
   );
+  return <WorkoutContext.Provider value={memoizedContextValue}>{children}</WorkoutContext.Provider>;
 };

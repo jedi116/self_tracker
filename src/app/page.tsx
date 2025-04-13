@@ -12,7 +12,7 @@ import SuperSaiyanGod from '@/../public/Super_Saiyan_god.png';
 import SuperSaiyanBlue from '@/../public/Goku-Super-Saiyan-Blue.png';
 import MasteredUltraInstinct from '@/../public/mastered-ultra-instinct.png';
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthSession } from '@/context/auth';
 import { signOut } from 'next-auth/react';
 
@@ -127,11 +127,6 @@ export default function Home() {
   const handleProfileClick = () => {
     setAnchorEl(null);
     router.push('/profile');
-  };
-
-  // Scroll to section functions
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const currentFormData = forms[currentForm] || forms[0];
@@ -552,7 +547,7 @@ export default function Home() {
         >
           {features.map((feature, index) => (
             <motion.div
-              key={index}
+              key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.15 }}

@@ -36,14 +36,9 @@ export const WorkoutFormProvider = ({ children }: WorkoutFormContextProviderProp
     goalFormType: 'create',
     workoutFormType: 'create',
   });
-
+  const momoizedContextValues = React.useMemo(() => ({ ...formState, setFormState }), [formState]);
   return (
-    <WorkoutFormContext.Provider
-      value={{
-        ...formState,
-        setFormState,
-      }}
-    >
+    <WorkoutFormContext.Provider value={momoizedContextValues}>
       {children}
     </WorkoutFormContext.Provider>
   );

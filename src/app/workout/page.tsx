@@ -21,7 +21,7 @@ export default async function WorkoutPage() {
   const workouts: Workout[] = await Effect.runPromise(getAllWorkouts(session.user?.id));
   const goals: WorkoutGoal[] = await Effect.runPromise(getAllGoals(session.user?.id));
   const workoutTypes: Partial<WorkoutTypes>[] = await Effect.runPromise(
-    getAllWorkoutTypes(session.user?.id)
+    getAllWorkoutTypes(session?.user?.id)
   );
   return (
     <Box sx={styles.page.container}>
