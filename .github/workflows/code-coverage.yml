@@ -2,7 +2,7 @@ name: Next.js Tests and Code Coverage
 
 on:
   push:
-    branches: [ main, develop, feature/* ]
+    branches: [ main, develop, feature/*, master ]
   pull_request:
     branches: [ main, develop ]
     types: [opened, synchronize, reopened]
