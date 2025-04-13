@@ -69,7 +69,7 @@ export default function Profile() {
     <Box sx={profileStyles.container}>
       <Paper elevation={1} sx={profileStyles.headerPaper}>
         <Typography sx={profileStyles.headerTitle}>User Profile</Typography>
-        <Typography sx={profileStyles.headerSubtitle}>
+        <Typography sx={{...profileStyles.headerSubtitle, mb: 2}}>
           View and manage your personal information, achievements, and progress.
         </Typography>
       </Paper>
@@ -95,8 +95,8 @@ export default function Profile() {
             >
               <Box sx={{ mb: 2 }}>
                 <Avatar
-                  src={session?.user?.image || ''}
-                  alt={session?.user?.name || 'User'}
+                  src={session?.user?.image ?? ''}
+                  alt={session?.user?.name ?? 'User'}
                   sx={{
                     width: 100,
                     height: 100,
@@ -108,7 +108,7 @@ export default function Profile() {
               </Box>
 
               <Typography variant="h5" sx={{ mb: 1 }}>
-                {session?.user?.name || 'User'}
+                {session?.user?.name ?? 'User'}
               </Typography>
 
               <Chip label={achievementLevel} color="primary" sx={{ mb: 3 }} />
@@ -151,7 +151,7 @@ export default function Profile() {
 
               <Box sx={{ width: '100%', mb: 2 }}>
                 <Typography variant="body2" sx={{ mb: 1 }}>
-                  Email: {session?.user?.email || 'user@example.com'}
+                  Email: {session?.user?.email ?? 'user@example.com'}
                 </Typography>
                 <Typography variant="body2" sx={{ mb: 1 }}>
                   Joined: January 1, 2024
@@ -340,7 +340,7 @@ export default function Profile() {
                 "Continuous improvement is better than delayed perfection."
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                Keep pushing your limits, {session?.user?.name?.split(' ')[0] || 'User'}!
+                Keep pushing your limits, {session?.user?.name?.split(' ')[0] ?? 'User'}!
               </Typography>
             </Box>
           </Paper>

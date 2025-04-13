@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Box, Button, ButtonGroup, Modal, Typography } from '@mui/material';
 import Image from 'next/image';
 import AddIcon from '@mui/icons-material/Add';
-import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import WorkoutModal from '@/app/workout/modal';
 import { useHeader } from '@/app/workout/hooks/header.hook';

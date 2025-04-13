@@ -12,7 +12,7 @@ import SuperSaiyanGod from '@/../public/Super_Saiyan_god.png';
 import SuperSaiyanBlue from '@/../public/Goku-Super-Saiyan-Blue.png';
 import MasteredUltraInstinct from '@/../public/mastered-ultra-instinct.png';
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthSession } from '@/context/auth';
 import { signOut } from 'next-auth/react';
 
@@ -129,12 +129,12 @@ export default function Home() {
     router.push('/profile');
   };
 
-  // Scroll to section functions
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // No longer used but kept as a comment for reference
+  // const scrollToSection = (sectionId: string) => {
+  //   document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  // };
 
-  const currentFormData = forms[currentForm] || forms[0];
+  const currentFormData = forms[currentForm] ?? forms[0];
 
   return (
     <Box
@@ -205,7 +205,7 @@ export default function Home() {
             >
               <Avatar
                 alt="user image"
-                src={session.user?.image || '/generic_user.jpg'}
+                src={session.user?.image ?? '/generic_user.jpg'}
                 sx={{ width: 40, height: 40 }}
               />
             </IconButton>
@@ -552,7 +552,7 @@ export default function Home() {
         >
           {features.map((feature, index) => (
             <motion.div
-              key={index}
+              key={`feature-${feature.title}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
